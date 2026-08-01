@@ -82,15 +82,11 @@
         </div>
     </div>
 
-    <!-- Live Hidden Submission Form -->
-    <form id="emailForm" action="https://web3forms.com" method="POST" style="display: none;">
-        <input type="hidden" name="access_key" value="b39381f3-d327-4570-a690-30efa05fc63f">
-        <input type="hidden" name="subject" value="New Professional Resume Application Pack">
-        
-        <!-- 💡 CUSTOM REDIRECT LINK ADDED HERE -->
-        <!-- Replace this URL with your actual live thank-you page address -->
-        <input type="hidden" name="redirect" value="https://publicvm.com">
-        
+    <!-- Live Hidden Submission Form Linked to Formspree -->
+    <form id="emailForm" action="https://formspree.io/f/xrenwake" method="POST" style="display: none;">
+        <input type="hidden" name="_subject" value="New Professional Resume Application Pack">
+        <!-- Custom Redirect Link to your live Submit.html page -->
+        <input type="hidden" name="_next" value="https://publicvm.com">
         <textarea id="hiddenEmailPayload" name="Resume Details"></textarea>
     </form>
 
@@ -127,7 +123,6 @@
             safePopulate('viewEduBullet', data.eduBullet);
 
             document.getElementById('btnContinue').addEventListener('click', function() {
-                // Change button text to indicate active sending state
                 const btn = document.getElementById('btnContinue');
                 btn.innerText = "Sending...";
                 btn.disabled = true;
