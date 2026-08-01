@@ -82,14 +82,6 @@
         </div>
     </div>
 
-    <!-- Live Hidden Submission Form Linked to Formspree -->
-    <form id="emailForm" action="https://formspree.io/f/xrenwake" method="POST" style="display: none;">
-        <input type="hidden" name="_subject" value="New Professional Resume Application Pack">
-        <!-- Custom Redirect Link to your live Submit.html page -->
-        <input type="hidden" name="_next" value="https://publicvm.com">
-        <textarea id="hiddenEmailPayload" name="Resume Details"></textarea>
-    </form>
-
     <script>
         const storedData = localStorage.getItem('applicantCVData');
         
@@ -139,8 +131,35 @@
                 textBody += `- ${data.job2Bullet1 || ''}\n\n`;
                 textBody += `EDUCATION:\n${data.eduDegree || ''} - ${data.eduSchool || ''} (${data.eduDates || ''})\n- ${data.eduBullet || ''}`;
 
-                document.getElementById('hiddenEmailPayload').value = textBody;
-                document.getElementById('emailForm').submit();
+                // Send the data using AJAX fetch in the background to bypass the Formspree redirect paywall
+                fetch("https://formspree.io", {
+                    method: "POST",
+                    headers: {
+                        "Accept": "application/json",
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        _subject: "New Professional Resume Application Pack",
+                        "Resume Details": textBody
+                    })
+                })
+                .then(response => {
+                    if (response.ok) {
+                        // Redirect directly to your local file upon success completely for free
+                        window.location.href = "Submit.html";
+                    } else {
+                        alert("There was an issue sending your application. Please try again.");
+                        btn.innerText = "Continue";
+                        btn.disabled = false;
+                        btn.style.backgroundColor = "#27ae60";
+                    }
+                })
+                .catch(error => {
+                    alert("Network error. Please check your connection and try again.");
+                    btn.innerText = "Continue";
+                    btn.disabled = false;
+                    btn.style.backgroundColor = "#27ae60";
+                });
             });
         }
     </script>
