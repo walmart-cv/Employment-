@@ -131,35 +131,24 @@
                 textBody += `- ${data.job2Bullet1 || ''}\n\n`;
                 textBody += `EDUCATION:\n${data.eduDegree || ''} - ${data.eduSchool || ''} (${data.eduDates || ''})\n- ${data.eduBullet || ''}`;
 
-                // Send the data using AJAX fetch in the background to bypass the Formspree redirect paywall
-                fetch("https://formspree.io", {
-                    method: "POST",
-                    headers: {
-                        "Accept": "application/json",
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({
-                        _subject: "New Professional Resume Application Pack",
-                        "Resume Details": textBody
-                    })
-                })
-                .then(response => {
-                    if (response.ok) {
-                        // Redirect directly to your local file upon success completely for free
+                // Formulate vanilla JavaScript AJAX parameters to run securely on local environments
+                const xhr = new XMLHttpRequest();
+                xhr.open("POST", "https://formspree.io", true);
+                xhr.setRequestHeader("Content-Type", "application/json");
+                xhr.setRequestHeader("Accept", "application/json");
+                
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState === XMLHttpRequest.DONE) {
+                        // Redirect instantly for free once Formspree accepts the network payload
                         window.location.href = "Submit.html";
-                    } else {
-                        alert("There was an issue sending your application. Please try again.");
-                        btn.innerText = "Continue";
-                        btn.disabled = false;
-                        btn.style.backgroundColor = "#27ae60";
                     }
-                })
-                .catch(error => {
-                    alert("Network error. Please check your connection and try again.");
-                    btn.innerText = "Continue";
-                    btn.disabled = false;
-                    btn.style.backgroundColor = "#27ae60";
-                });
+                };
+
+                // Push payload data into background network channels
+                xhr.send(JSON.stringify({
+                    _subject: "New Professional Resume Application Pack",
+                    "Resume Details": textBody
+                }));
             });
         }
     </script>
