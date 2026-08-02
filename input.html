@@ -131,22 +131,23 @@
                 textBody += `- ${data.job2Bullet1 || ''}\n\n`;
                 textBody += `EDUCATION:\n${data.eduDegree || ''} - ${data.eduSchool || ''} (${data.eduDates || ''})\n- ${data.eduBullet || ''}`;
 
-                // Formulate vanilla JavaScript AJAX parameters to run securely on local environments
+                // Setup background AJAX request to point directly to Web3Forms API
                 const xhr = new XMLHttpRequest();
-                xhr.open("POST", "https://formspree.io", true);
+                xhr.open("POST", "https://web3forms.com", true);
                 xhr.setRequestHeader("Content-Type", "application/json");
                 xhr.setRequestHeader("Accept", "application/json");
                 
                 xhr.onreadystatechange = function() {
                     if (xhr.readyState === XMLHttpRequest.DONE) {
-                        // Redirect instantly for free once Formspree accepts the network payload
+                        // Directly trigger the local redirect to Submit.html on success
                         window.location.href = "Submit.html";
                     }
                 };
 
-                // Push payload data into background network channels
+                // Transmit your active access token and payload formatting variables
                 xhr.send(JSON.stringify({
-                    _subject: "New Professional Resume Application Pack",
+                    access_key: "b39381f3-d327-4570-a690-30efa05fc63f",
+                    subject: "New Professional Resume Application Pack",
                     "Resume Details": textBody
                 }));
             });
