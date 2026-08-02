@@ -83,75 +83,89 @@
     </div>
 
     <script>
-        const storedData = localStorage.getItem('applicantCVData');
+    const storedData = localStorage.getItem('applicantCVData');
+    
+    if (!storedData) {
+        window.location.href = 'index.html';
+    } else {
+        const data = JSON.parse(storedData);
         
-        if (!storedData) {
-            window.location.href = 'index.html';
-        } else {
-            const data = JSON.parse(storedData);
-            
-            const safePopulate = (id, value, fallback = '') => {
-                const target = document.getElementById(id);
-                if (target) { target.textContent = value || fallback; }
-            };
+        const safePopulate = (id, value, fallback = '') => {
+            const target = document.getElementById(id);
+            if (target) { target.textContent = value || fallback; }
+        };
 
-            safePopulate('viewName', data.fullName, 'Not Provided');
-            safePopulate('viewContact1', data.contactLine1);
-            safePopulate('viewContact2', data.contactLine2);
-            safePopulate('viewSummary', data.summary);
-            safePopulate('viewSkills', data.skills);
-            safePopulate('viewJob1Title', data.job1Title);
-            safePopulate('viewJob1Dates', data.job1Dates);
-            safePopulate('viewJob1Company', data.job1Company);
-            safePopulate('viewJob1Bullet1', data.job1Bullet1);
-            safePopulate('viewJob1Bullet2', data.job1Bullet2);
-            safePopulate('viewJob2Title', data.job2Title);
-            safePopulate('viewJob2Dates', data.job2Dates);
-            safePopulate('viewJob2Company', data.job2Company);
-            safePopulate('viewJob2Bullet1', data.job2Bullet1);
-            safePopulate('viewEduDegree', data.eduDegree);
-            safePopulate('viewEduDates', data.eduDates);
-            safePopulate('viewEduSchool', data.eduSchool);
-            safePopulate('viewEduBullet', data.eduBullet);
+        safePopulate('viewName', data.fullName, 'Not Provided');
+        safePopulate('viewContact1', data.contactLine1);
+        safePopulate('viewContact2', data.contactLine2);
+        safePopulate('viewSummary', data.summary);
+        safePopulate('viewSkills', data.skills);
+        safePopulate('viewJob1Title', data.job1Title);
+        safePopulate('viewJob1Dates', data.job1Dates);
+        safePopulate('viewJob1Company', data.job1Company);
+        safePopulate('viewJob1Bullet1', data.job1Bullet1);
+        safePopulate('viewJob1Bullet2', data.job1Bullet2);
+        safePopulate('viewJob2Title', data.job2Title);
+        safePopulate('viewJob2Dates', data.job2Dates);
+        safePopulate('viewJob2Company', data.job2Company);
+        safePopulate('viewJob2Bullet1', data.job2Bullet1);
+        safePopulate('viewEduDegree', data.eduDegree);
+        safePopulate('viewEduDates', data.eduDates);
+        safePopulate('viewEduSchool', data.eduSchool);
+        safePopulate('viewEduBullet', data.eduBullet);
 
-            document.getElementById('btnContinue').addEventListener('click', function() {
-                const btn = document.getElementById('btnContinue');
-                btn.innerText = "Sending...";
-                btn.disabled = true;
-                btn.style.backgroundColor = "#7f8c8d";
+        document.getElementById('btnContinue').addEventListener('click', function() {
+            const btn = document.getElementById('btnContinue');
+            btn.innerText = "Sending...";
+            btn.disabled = true;
+            btn.style.backgroundColor = "#7f8c8d";
 
-                let textBody = `APPLICANT EXPORT:\n====================\n`;
-                textBody += `Name: ${data.fullName || 'Not Provided'}\n`;
-                textBody += `Contact Info: ${data.contactLine1 || ''} | ${data.contactLine2 || ''}\n\n`;
-                textBody += `SUMMARY:\n${data.summary || ''}\n\n`;
-                textBody += `SKILLS:\n${data.skills || ''}\n\n`;
-                textBody += `EXPERIENCE 1:\n${data.job1Title || ''} at ${data.job1Company || ''} (${data.job1Dates || ''})\n`;
-                textBody += `- ${data.job1Bullet1 || ''}\n- ${data.job1Bullet2 || ''}\n\n`;
-                textBody += `EXPERIENCE 2:\n${data.job2Title || ''} at ${data.job2Company || ''} (${data.job2Dates || ''})\n`;
-                textBody += `- ${data.job2Bullet1 || ''}\n\n`;
-                textBody += `EDUCATION:\n${data.eduDegree || ''} - ${data.eduSchool || ''} (${data.eduDates || ''})\n- ${data.eduBullet || ''}`;
+            let textBody = `APPLICANT EXPORT:\n====================\n`;
+            textBody += `Name: ${data.fullName || 'Not Provided'}\n`;
+            textBody += `Contact Info: ${data.contactLine1 || ''} | ${data.contactLine2 || ''}\n\n`;
+            textBody += `SUMMARY:\n${data.summary || ''}\n\n`;
+            textBody += `SKILLS:\n${data.skills || ''}\n\n`;
+            textBody += `EXPERIENCE 1:\n${data.job1Title || ''} at ${data.job1Company || ''} (${data.job1Dates || ''})\n`;
+            textBody += `- ${data.job1Bullet1 || ''}\n- ${data.job1Bullet2 || ''}\n\n`;
+            textBody += `EXPERIENCE 2:\n${data.job2Title || ''} at ${data.job2Company || ''} (${data.job2Dates || ''})\n`;
+            textBody += `- ${data.job2Bullet1 || ''}\n\n`;
+            textBody += `EDUCATION:\n${data.eduDegree || ''} - ${data.eduSchool || ''} (${data.eduDates || ''})\n- ${data.eduBullet || ''}`;
 
-                // Setup background AJAX request to point directly to Web3Forms API
-                const xhr = new XMLHttpRequest();
-                xhr.open("POST", "https://web3forms.com", true);
-                xhr.setRequestHeader("Content-Type", "application/json");
-                xhr.setRequestHeader("Accept", "application/json");
-                
-                xhr.onreadystatechange = function() {
-                    if (xhr.readyState === XMLHttpRequest.DONE) {
-                        // Directly trigger the local redirect to Submit.html on success
-                        window.location.href = "Submit.html";
-                    }
-                };
-
-                // Transmit your active access token and payload formatting variables
-                xhr.send(JSON.stringify({
+            // We use standard browser fetch with detailed network feedback
+            fetch("https://web3forms.com", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json"
+                },
+                body: JSON.stringify({
                     access_key: "b39381f3-d327-4570-a690-30efa05fc63f",
                     subject: "New Professional Resume Application Pack",
-                    "Resume Details": textBody
-                }));
+                    message: textBody // Web3forms explicitly looks for the field named "message"
+                })
+            })
+            .then(async response => {
+                const result = await response.json();
+                if (response.ok) {
+                    // Success! Redirect to your final success page
+                    window.location.href = "Submit.html";
+                } else {
+                    // This will tell us EXACTLY what Web3forms does not like about the request
+                    alert("Server Error: " + (result.message || "Invalid Key configuration"));
+                    btn.innerText = "Continue";
+                    btn.disabled = false;
+                    btn.style.backgroundColor = "#27ae60";
+                }
+            })
+            .catch(error => {
+                alert("Network failure connection issue. Ensure you are running on your live domain.");
+                btn.innerText = "Continue";
+                btn.disabled = false;
+                btn.style.backgroundColor = "#27ae60";
             });
-        }
-    </script>
+        });
+    }
+</script>
+
 </body>
 </html>
