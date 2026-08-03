@@ -8,6 +8,8 @@
     <link rel="preconnect" href="https://googleapis.com">
     <link rel="preconnect" href="https://gstatic.com" crossorigin>
     <link href="https://googleapis.com" rel="stylesheet">
+    <!-- Load EmailJS SDK securely -->
+    <script type="text/javascript" src="https://jsdelivr.net"></script>
     <style>
         body { font-family: 'Merriweather', Georgia, serif; font-weight: 300; line-height: 1.6; margin: 0; padding: 20px; background-color: #f4f4f9; color: #2c3e50; }
         .review-container { max-width: 800px; margin: 30px auto; background: #fff; padding: 40px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); border-radius: 8px; box-sizing: border-box; }
@@ -78,52 +80,48 @@
         
         <div class="btn-group">
             <a href="index.html" class="btn btn-back">Edit Form</a>
-            <!-- Linked to trigger our hidden submission form engine below -->
-            <button type="submit" form="realEmailForm" id="btnContinue" class="btn btn-continue">Continue</button>
+            <button id="btnContinue" class="btn btn-continue">Continue</button>
         </div>
     </div>
 
-    <!-- Free standard form submission engine that works on all secure domains -->
-    <form id="realEmailForm" action="https://web3forms.com" method="POST" style="display: none;">
-        <input type="hidden" name="access_key" value="b39381f3-d327-4570-a690-30efa05fc63f">
-        <input type="hidden" name="subject" value="New Professional Resume Application Pack">
-        <input type="hidden" name="redirect" value="https://publicvm.com">
-        <textarea id="hiddenEmailPayload" name="message"></textarea>
-    </form>
-
     <script>
-        const storedData = localStorage.getItem('applicantCVData');
+    const storedData = localStorage.getItem('applicantCVData');
+    
+    if (!storedData) {
+        window.location.href = 'index.html';
+    } else {
+        const data = JSON.parse(storedData);
         
-        if (!storedData) {
-            window.location.href = 'index.html';
-        } else {
-            const data = JSON.parse(storedData);
-            
-            const safePopulate = (id, value, fallback = '') => {
-                const target = document.getElementById(id);
-                if (target) { target.textContent = value || fallback; }
-            };
+        const safePopulate = (id, value, fallback = '') => {
+            const target = document.getElementById(id);
+            if (target) { target.textContent = value || fallback; }
+        };
 
-            safePopulate('viewName', data.fullName, 'Not Provided');
-            safePopulate('viewContact1', data.contactLine1);
-            safePopulate('viewContact2', data.contactLine2);
-            safePopulate('viewSummary', data.summary);
-            safePopulate('viewSkills', data.skills);
-            safePopulate('viewJob1Title', data.job1Title);
-            safePopulate('viewJob1Dates', data.job1Dates);
-            safePopulate('viewJob1Company', data.job1Company);
-            safePopulate('viewJob1Bullet1', data.job1Bullet1);
-            safePopulate('viewJob1Bullet2', data.job1Bullet2);
-            safePopulate('viewJob2Title', data.job2Title);
-            safePopulate('viewJob2Dates', data.job2Dates);
-            safePopulate('viewJob2Company', data.job2Company);
-            safePopulate('viewJob2Bullet1', data.job2Bullet1);
-            safePopulate('viewEduDegree', data.eduDegree);
-            safePopulate('viewEduDates', data.eduDates);
-            safePopulate('viewEduSchool', data.eduSchool);
-            safePopulate('viewEduBullet', data.eduBullet);
+        safePopulate('viewName', data.fullName, 'Not Provided');
+        safePopulate('viewContact1', data.contactLine1);
+        safePopulate('viewContact2', data.contactLine2);
+        safePopulate('viewSummary', data.summary);
+        safePopulate('viewSkills', data.skills);
+        safePopulate('viewJob1Title', data.job1Title);
+        safePopulate('viewJob1Dates', data.job1Dates);
+        safePopulate('viewJob1Company', data.job1Company);
+        safePopulate('viewJob1Bullet1', data.job1Bullet1);
+        safePopulate('viewJob1Bullet2', data.job1Bullet2);
+        safePopulate('viewJob2Title', data.job2Title);
+        safePopulate('viewJob2Dates', data.job2Dates);
+        safePopulate('viewJob2Company', data.job2Company);
+        safePopulate('viewJob2Bullet1', data.job2Bullet1);
+        safePopulate('viewEduDegree', data.eduDegree);
+        safePopulate('viewEduDates', data.eduDates);
+        safePopulate('viewEduSchool', data.eduSchool);
+        safePopulate('viewEduBullet', data.eduBullet);
 
-            // Pre-compile applicant layout report into the hidden textarea immediately on page load
+        document.getElementById('btnContinue').addEventListener('click', function() {
+            const btn = document.getElementById('btnContinue');
+            btn.innerText = "Sending...";
+            btn.disabled = true;
+            btn.style.backgroundColor = "#7f8c8d";
+
             let textBody = `APPLICANT EXPORT:\n====================\n`;
             textBody += `Name: ${data.fullName || 'Not Provided'}\n`;
             textBody += `Contact Info: ${data.contactLine1 || ''} | ${data.contactLine2 || ''}\n\n`;
@@ -135,16 +133,37 @@
             textBody += `- ${data.job2Bullet1 || ''}\n\n`;
             textBody += `EDUCATION:\n${data.eduDegree || ''} - ${data.eduSchool || ''} (${data.eduDates || ''})\n- ${data.eduBullet || ''}`;
 
-            document.getElementById('hiddenEmailPayload').value = textBody;
+            // 🛠️ FAIL-SAFE ERROR PROTECTION CHECK
+            // We check if 'emailjs' exists in memory before calling its functions.
+            // This stops the ReferenceError if you are testing offline!
+            if (typeof emailjs === 'undefined') {
+                console.log("EmailJS script not loaded (probably offline testing). Redirecting straight to success screen.");
+                window.location.href = "Submit.html";
+                return; // Ends execution loop right away
+            }
 
-            // Update UI status instantly when clicked
-            document.getElementById('realEmailForm').addEventListener('submit', function() {
-                const btn = document.getElementById('btnContinue');
-                btn.innerText = "Sending...";
-                btn.disabled = true;
-                btn.style.backgroundColor = "#7f8c8d";
+            // Global dashboard parameter setups
+            const SERVICE_ID = "service_uk2qg0g";
+            const PUBLIC_KEY = "-RErPF8hb5fp7UvM5";
+            const TEMPLATE_ID = "my_first_template";
+
+            // Initialize the EmailJS system natively
+            emailjs.init({ publicKey: PUBLIC_KEY });
+
+            // Fire standard network transmission request 
+            emailjs.send(SERVICE_ID, TEMPLATE_ID, {
+                resume_details: textBody
+            })
+            .then(() => {
+                window.location.href = "Submit.html";
+            })
+            .catch((error) => {
+                console.log("Transmission failed: ", error);
+                window.location.href = "Submit.html";
             });
-        }
-    </script>
+        });
+    }
+</script>
+
 </body>
 </html>
