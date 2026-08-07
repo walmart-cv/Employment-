@@ -314,13 +314,17 @@
 <script>
 let base64ImageString = "";
 
-// Image type validation and real-time canvas resizing listener
+// Universally responsive file expansion checker listener
 document.getElementById('clientImageInput').addEventListener('change', function(event) {
-    const file = event.target.files;
+    const file = event.target.files[0];
     if (file) {
-        const allowedTypes = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'];
-        if (!allowedTypes.includes(file.type)) {
-            alert("Invalid File Type! Please choose a valid image format (.jpg, .png, .webp).");
+        // Universal Name Check: Reads the letters at the end of the filename to avoid mobile browser errors
+        const fileName = file.name.toLowerCase();
+        const validExtensions = ['.jpg', '.jpeg', '.png', '.webp', '.gif'];
+        const isValidExtension = validExtensions.some(ext => fileName.endsWith(ext));
+
+        if (!isValidExtension) {
+            alert("Invalid File Type! Please choose a valid image format (.jpg, .jpeg, .png, .webp).");
             event.target.value = "";
             return;
         }
@@ -334,7 +338,6 @@ document.getElementById('clientImageInput').addEventListener('change', function(
                 const canvas = document.createElement('canvas');
                 const ctx = canvas.getContext('2d');
 
-                // Enforce a strict passport picture dimension rule (Max width 400px)
                 const maxDimension = 400;
                 let width = img.width;
                 let height = img.height;
@@ -355,7 +358,7 @@ document.getElementById('clientImageInput').addEventListener('change', function(
                 canvas.height = height;
                 ctx.drawImage(img, 0, 0, width, height);
 
-                // Compress data output to safe JPEG format at 70% quality factor
+                // Compress data output to a tiny, fast-loading image string format
                 base64ImageString = canvas.toDataURL('image/jpeg', 0.7);
 
                 const label = document.getElementById('imageLabel');
@@ -366,7 +369,7 @@ document.getElementById('clientImageInput').addEventListener('change', function(
     }
 });
 
-// Form submission handler to forward metrics to input.html review screen
+// Form submission handler
 document.getElementById('cvForm').addEventListener('submit', function(event) {
     event.preventDefault();
 
