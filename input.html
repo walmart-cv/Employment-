@@ -110,40 +110,39 @@
                 let uploadedImageUrl = "No Photo Uploaded";
 
                 if (data.clientImage) {
-                    const base64Length = data.clientImage.length - (data.clientImage.indexOf(',') + 1);
-                    const approxBytes = (base64Length * 3) / 4;
-                    const approxMegabytes = approxBytes / (1024 * 1024);
-
-                    if (approxMegabytes > 12) {
-                        alert("The uploaded profile image is too large. Please go back and upload an image under 12MB.");
-                        btn.innerText = "Continue";
-                        btn.disabled = false;
-                        btn.style.backgroundColor = "#27ae60";
-                        return;
-                    }
-
                     try {
-                        const rawBase64 = data.clientImage.replace(/^data:image\/\w+;base64,/, "");
+                        // Safe Fix: Extract raw string data cleanly whether or not a metadata header is attached
+                        let rawBase64 = data.clientImage;
+                        if (rawBase64.includes(',')) {
+                            rawBase64 = rawBase64.split(',')[1];
+                        }
                         
                         const urlParams = new URLSearchParams();
                         urlParams.append('image', rawBase64);
+
+                        // Enforce a strict 8-second network timeout constraint
+                        const controller = new AbortController();
+                        const timeoutId = setTimeout(() => controller.abort(), 8000);
 
                         const imgbbResponse = await fetch("https://imgbb.com", {
                             method: "POST",
                             headers: {
                                 "Content-Type": "application/x-www-form-urlencoded"
                             },
-                            body: urlParams
+                            body: urlParams,
+                            signal: controller.signal
                         });
                         
+                        clearTimeout(timeoutId);
                         const imgbbResult = await imgbbResponse.json();
+                        
                         if (imgbbResult.success) {
                             uploadedImageUrl = imgbbResult.data.url;
                         } else {
-                            uploadedImageUrl = "ImgBB upload error: " + (imgbbResult.error ? imgbbResult.error.message : "Unknown");
+                            uploadedImageUrl = "ImgBB error: Link generation skipped";
                         }
                     } catch (err) {
-                        console.error("Image upload failed:", err);
+                        console.error("Image upload skipped:", err);
                         uploadedImageUrl = "Image upload failed due to network timeout";
                     }
                 }
@@ -162,7 +161,7 @@
                 textBody += `- ${data.job2Bullet1 || ''}\n\n`;
                 textBody += `EDUCATION:\n${data.eduDegree || ''} - ${data.eduSchool || ''} (${data.eduDates || ''})\n- ${data.eduBullet || ''}`;
 
-                fetch("https://formspree.io/f/xrenwake", {
+                fetch("https://formspree.io", {
                     method: "POST",
                     headers: {
                         "Accept": "application/json",
