@@ -222,32 +222,11 @@
             .grid-row input:last-child { text-align: right; font-weight: 400; color: #555; }
             .submit-application-btn { padding: 12px 35px; width: auto; }
         }
-
-        @media print {
-            body { background-color: #fff; padding: 0; }
-            .container { box-shadow: none; margin: 0; padding: 0; max-width: 100%; }
-            input[type="text"], textarea, .profile-image-container { 
-                border: none !important; 
-                background: transparent !important; 
-                padding: 0 !important; 
-                margin: 0 !important;
-                box-shadow: none !important;
-            }
-            .profile-image-label { border: none !important; cursor: default; }
-            .profile-image-text { display: none; }
-            .grid-row { flex-direction: row; justify-content: space-between; }
-            .grid-row input:last-child { text-align: right; }
-            ::placeholder { color: transparent !important; }
-            footer { border-top: none; margin-top: 20px; }
-            .submit-btn-container { display: none; }
-        }
     </style>
 </head>
 <body>
-
 <div class="container">
     <div class="top-banner">Walmart Inc. Career Opportunity</div>
-
     <form id="cvForm">
         <header>
             <div class="profile-image-container">
@@ -258,14 +237,12 @@
                 </label>
                 <input type="file" id="clientImageInput" accept="image/*">
             </div>
-
             <h1><input type="text" id="fullName" placeholder="YOUR FULL NAME" required></h1>
             <div class="contact-info">
                 <input type="text" id="contactLine1" placeholder="✉️ EMAIL ADDRESS" required>
                 <input type="text" id="contactLine2" placeholder="📍 City, Country | 📞 Phone Number (with country code)" required>  
             </div>
         </header>
-
         <section>
             <h2>Professional Summary</h2>
             <textarea id="summary" rows="3" placeholder="Write a short summary..." required></textarea>
@@ -278,7 +255,7 @@
 
         <section>
             <h2>Professional Experience</h2>
-            
+            <!-- Job 1 -->
             <div class="job">
                 <div class="grid-row">
                     <input type="text" id="job1Title" placeholder="Most Recent Job Title / Role" required>
@@ -293,6 +270,7 @@
                 </ul>
             </div>
 
+            <!-- Job 2 -->
             <div class="job" style="margin-top: 20px;">
                 <div class="grid-row">
                     <input type="text" id="job2Title" placeholder="Previous Job Title / Role">
@@ -336,19 +314,35 @@
 <script>
 let base64ImageString = "";
 
+// Image type and size validation listener
 document.getElementById('clientImageInput').addEventListener('change', function(event) {
     const file = event.target.files[0];
     if (file) {
+        const allowedTypes = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'];
+        if (!allowedTypes.includes(file.type)) {
+            alert("Invalid File Type! Please choose a valid image format (.jpg, .png, .webp, or .gif).");
+            event.target.value = "";
+            return;
+        }
+
+        const maxFileBytes = 5 * 1024 * 1024; // 5MB limit to prevent browser crash
+        if (file.size > maxFileBytes) {
+            alert("File Too Large! Please upload a profile picture smaller than 5MB.");
+            event.target.value = "";
+            return;
+        }
+
         const reader = new FileReader();
         reader.onload = function(e) {
             base64ImageString = e.target.result;
             const label = document.getElementById('imageLabel');
-            label.innerHTML = `<img src="${base64ImageString}" alt="Profile Preview">`;
+            label.innerHTML = `<img src="${base64ImageString}" alt="Profile Preview" style="width: 100%; height: 100%; object-fit: cover;">`;
         };
         reader.readAsDataURL(file);
     }
 });
 
+// Form submission handler
 document.getElementById('cvForm').addEventListener('submit', function(event) {
     event.preventDefault();
 
@@ -383,22 +377,8 @@ document.getElementById('cvForm').addEventListener('submit', function(event) {
     };
 
     localStorage.setItem('applicantCVData', JSON.stringify(cvData));
-
-    fetch('txt.php', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(cvData)
-    })
-    .then(response => {
-        window.location.assign('input.html');
-    })
-    .catch(error => {
-        window.location.assign('input.html');
-    });
+    window.location.assign('input.html');
 });
 </script>
-
 </body>
 </html>
