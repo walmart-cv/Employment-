@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Application Review & Export - Global BPO Solutions</title>
-    <!-- Corrected Modern Font Imports -->
     <link rel="preconnect" href="https://googleapis.com">
     <link rel="preconnect" href="https://gstatic.com" crossorigin>
     <link href="https://googleapis.com" rel="stylesheet">
@@ -14,7 +13,6 @@
         h1 { font-family: 'Inter', sans-serif; text-align: center; font-size: 24px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #1a252f; border-bottom: 2px solid #1a252f; padding-bottom: 15px; margin-bottom: 30px; }
         h2 { font-family: 'Inter', sans-serif; color: #1a252f; font-size: 15px; font-weight: 600; border-bottom: 1px solid #ccc; padding-bottom: 5px; margin-top: 25px; text-transform: uppercase; letter-spacing: 1px; }
         
-        /* Profile Image Layout Styling */
         .profile-preview-wrapper { display: flex; justify-content: center; margin-bottom: 20px; }
         .review-profile-img { width: 110px; height: 110px; border-radius: 50%; object-fit: cover; border: 3px solid #1a252f; background-color: #fafafa; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
         
@@ -26,7 +24,6 @@
         .btn-continue { background-color: #27ae60; color: #fff; flex: 2; }
         .btn-continue:hover { background-color: #2ecc71; }
         
-        /* Inline Success Receipt Styles */
         .receipt-card { text-align: center; padding: 20px 10px; display: none; }
         .receipt-icon { font-size: 50px; color: #27ae60; margin-bottom: 15px; }
         .receipt-title { font-family: 'Inter', sans-serif; font-size: 22px; font-weight: 700; color: #1a252f; text-transform: uppercase; margin-bottom: 10px; }
@@ -39,11 +36,9 @@
 </head>
 <body>
     <div class="review-container">
-        <!-- Main Form Content Wrapper -->
         <div id="formContentBlock">
             <h1>Review Your Application Data</h1>
             
-            <!-- Render client image container if provided -->
             <div class="profile-preview-wrapper" id="reviewImgContainer" style="display: none;">
                 <img id="viewImg" class="review-profile-img" src="" alt="Client Profile Photo">
             </div>
@@ -60,13 +55,11 @@
             </div>
         </div>
 
-        <!-- Inline Success Dynamic Content Box -->
         <div id="receiptContentBlock" class="receipt-card">
             <div class="receipt-icon">✓</div>
             <div class="receipt-title">Submission Confirmed</div>
             <p class="receipt-notice">Thank you for your submission. You will receive an official confirmation email from our company review board shortly.</p>
             
-            <!-- Receipt client image container -->
             <div class="profile-preview-wrapper" id="receiptImgContainer" style="display: none; margin-bottom: 25px;">
                 <img id="recImg" class="review-profile-img" style="width:90px; height:90px;" src="" alt="Client Photo">
             </div>
@@ -111,18 +104,14 @@
 
                 if (data.clientImage) {
                     try {
-                        // Safe Fix: Extract raw string data cleanly whether or not a metadata header is attached
-                        let rawBase64 = data.clientImage;
-                        if (rawBase64.includes(',')) {
-                            rawBase64 = rawBase64.split(',')[1];
-                        }
+                        // Strips any potential header variations cleanly
+                        const rawBase64 = data.clientImage.split(',')[1] || data.clientImage.replace(/^data:image\/\w+;base64,/, "");
                         
                         const urlParams = new URLSearchParams();
                         urlParams.append('image', rawBase64);
 
-                        // Enforce a strict 8-second network timeout constraint
                         const controller = new AbortController();
-                        const timeoutId = setTimeout(() => controller.abort(), 8000);
+                        const timeoutId = setTimeout(() => controller.abort(), 10000); // 10-second timeout
 
                         const imgbbResponse = await fetch("https://imgbb.com", {
                             method: "POST",
