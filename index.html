@@ -3,198 +3,406 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Application Review & Export - Global BPO Solutions</title>
-    <!-- Corrected Modern Font Imports -->
+    <title>Walmart Inc - Professional CV Form</title>
     <link rel="preconnect" href="https://googleapis.com">
     <link rel="preconnect" href="https://gstatic.com" crossorigin>
     <link href="https://googleapis.com" rel="stylesheet">
+    
     <style>
-        body { font-family: 'Merriweather', Georgia, serif; font-weight: 300; line-height: 1.6; margin: 0; padding: 20px; background-color: #f4f4f9; color: #2c3e50; }
-        .review-container { max-width: 800px; margin: 30px auto; background: #fff; padding: 40px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); border-radius: 8px; box-sizing: border-box; }
-        h1 { font-family: 'Inter', sans-serif; text-align: center; font-size: 24px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #1a252f; border-bottom: 2px solid #1a252f; padding-bottom: 15px; margin-bottom: 30px; }
-        h2 { font-family: 'Inter', sans-serif; color: #1a252f; font-size: 15px; font-weight: 600; border-bottom: 1px solid #ccc; padding-bottom: 5px; margin-top: 25px; text-transform: uppercase; letter-spacing: 1px; }
-        
-        /* Profile Image Layout Styling */
-        .profile-preview-wrapper { display: flex; justify-content: center; margin-bottom: 20px; }
-        .review-profile-img { width: 110px; height: 110px; border-radius: 50%; object-fit: cover; border: 3px solid #1a252f; background-color: #fafafa; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        
-        .data-card { background: #fafafa; border: 1px solid #eee; border-radius: 6px; padding: 15px; margin-top: 10px; font-size: 15px; white-space: pre-wrap; }
-        .btn-group { display: flex; gap: 15px; margin-top: 40px; border-top: 1px solid #eee; padding-top: 20px; }
-        .btn { font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; padding: 12px 25px; border: none; border-radius: 4px; cursor: pointer; transition: all 0.2s ease; text-decoration: none; text-align: center; }
-        .btn-back { background-color: #7f8c8d; color: #fff; flex: 1; }
-        .btn-back:hover { background-color: #95a5a6; }
-        .btn-continue { background-color: #27ae60; color: #fff; flex: 2; }
-        .btn-continue:hover { background-color: #2ecc71; }
-        
-        /* Inline Success Receipt Styles */
-        .receipt-card { text-align: center; padding: 20px 10px; display: none; }
-        .receipt-icon { font-size: 50px; color: #27ae60; margin-bottom: 15px; }
-        .receipt-title { font-family: 'Inter', sans-serif; font-size: 22px; font-weight: 700; color: #1a252f; text-transform: uppercase; margin-bottom: 10px; }
-        .receipt-notice { font-size: 15px; color: #555; max-width: 500px; margin: 0 auto 25px auto; line-height: 1.5; }
-        .client-info-box { background: #fafafa; border: 1px solid #eee; border-radius: 6px; padding: 20px; max-width: 450px; margin: 0 auto; text-align: left; position: relative; }
-        .info-row { margin-bottom: 10px; font-size: 14px; font-family: 'Inter', sans-serif; color: #2c3e50; }
-        .info-row:last-child { margin-bottom: 0; }
-        .info-label { font-weight: 700; color: #1a252f; text-transform: uppercase; font-size: 12px; letter-spacing: 0.5px; display: inline-block; width: 120px; }
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            font-weight: 300;
+            line-height: 1.6;
+            margin: 0;
+            padding: 10px;
+            background-color: #f4f4f9;
+            color: #2c3e50;
+        }
+        .container {
+            max-width: 800px;
+            margin: 10px auto;
+            background: #fff;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            border-radius: 8px;
+            box-sizing: border-box;
+        }
+        .top-banner {
+            font-family: 'Inter', sans-serif;
+            text-align: center;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #7f8c8d;
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+        header {
+            text-align: center;
+            border-bottom: 2px solid #1a252f;
+            padding-bottom: 20px;
+            margin-bottom: 25px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .profile-image-container {
+            margin-bottom: 15px;
+            position: relative;
+        }
+        .profile-image-label {
+            display: block;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 2px dashed #ccc;
+            background: #fafafa;
+            cursor: pointer;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        .profile-image-label:hover {
+            border-color: #1a252f;
+            background: #f0f3f4;
+        }
+        .profile-image-label img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .profile-image-placeholder {
+            font-family: 'Inter', sans-serif;
+            font-size: 24px;
+            color: #7f8c8d;
+            text-align: center;
+        }
+        .profile-image-text {
+            font-size: 9px;
+            display: block;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #95a5a6;
+        }
+        input[type="file"] {
+            display: none;
+        }
+        input[type="text"], textarea {
+            width: 100%;
+            border: 1px solid #ccc;
+            background: #fafafa;
+            font-family: inherit;
+            color: inherit;
+            padding: 8px;
+            box-sizing: border-box;
+            border-radius: 4px;
+            margin-bottom: 5px;
+            transition: all 0.3s ease;
+            font-size: 14px;
+        }
+        input[type="text"]:focus, textarea:focus {
+            border-color: #1a252f;
+            background: #fff;
+            outline: none;
+            box-shadow: 0 0 4px rgba(26, 37, 47, 0.2);
+        }
+        ::placeholder {
+            color: #b0b0b0;
+            font-weight: 300;
+        }
+        h1 input {
+            font-family: 'Inter', sans-serif;
+            text-align: center;
+            font-size: 22px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #1a252f;
+        }
+        .contact-info {
+            width: 100%;
+        }
+        .contact-info input {
+            font-family: 'Inter', sans-serif;
+            text-align: center;
+            font-size: 12px;
+            color: #555;
+            width: 100%;
+            margin: 6px auto;
+            display: block;
+            letter-spacing: 0.5px;
+        }
+        h2 {
+            font-family: 'Inter', sans-serif;
+            color: #1a252f;
+            font-size: 15px;
+            font-weight: 600;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 5px;
+            margin-top: 25px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        textarea {
+            resize: vertical;
+        }
+        .grid-row {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            margin-bottom: 5px;
+        }
+        .grid-row input {
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 14px;
+            color: #1a252f;
+        }
+        .sub-text input {
+            font-style: italic;
+            color: #7f8c8d;
+            font-size: 13px;
+        }
+        ul {
+            margin: 5px 0 0 0;
+            padding-left: 15px;
+        }
+        li {
+            margin-bottom: 10px;
+            font-size: 13px;
+        }
+        li textarea {
+            width: 100%;
+        }
+        footer {
+            font-family: 'Inter', sans-serif;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            text-align: center;
+            font-size: 11px;
+            color: #7f8c8d;
+            letter-spacing: 0.5px;
+            line-height: 1.4;
+        }
+        .submit-btn-container {
+            text-align: center;
+            margin-top: 25px;
+        }
+        .submit-application-btn {
+            font-family: 'Inter', sans-serif;
+            background-color: #1a252f;
+            color: #fff;
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 12px 0;
+            width: 100%;
+            max-width: 280px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+        .submit-application-btn:hover {
+            background-color: #2c3e50;
+        }
+
+        @media (min-width: 600px) {
+            body { padding: 20px; }
+            .container { padding: 40px; margin: 30px auto; }
+            .top-banner { font-size: 13px; letter-spacing: 2px; }
+            h1 input { font-size: 26px; letter-spacing: 1.5px; }
+            .contact-info input { width: 85%; }
+            .grid-row { flex-direction: row; justify-content: space-between; gap: 15px; }
+            .grid-row input:last-child { text-align: right; font-weight: 400; color: #555; }
+            .submit-application-btn { padding: 12px 35px; width: auto; }
+        }
     </style>
 </head>
 <body>
-    <div class="review-container">
-        <!-- Main Form Content Wrapper -->
-        <div id="formContentBlock">
-            <h1>Review Your Application Data</h1>
-            
-            <!-- Render client image container if provided -->
-            <div class="profile-preview-wrapper" id="reviewImgContainer" style="display: none;">
-                <img id="viewImg" class="review-profile-img" src="" alt="Client Profile Photo">
+<div class="container">
+    <div class="top-banner">Walmart Inc. Career Opportunity</div>
+    <form id="cvForm">
+        <header>
+            <div class="profile-image-container">
+                <label for="clientImageInput" class="profile-image-label" id="imageLabel">
+                    <div class="profile-image-placeholder" id="imagePlaceholder">
+                        📷<br><span class="profile-image-text">Add Photo</span>
+                    </div>
+                </label>
+                <input type="file" id="clientImageInput" accept="image/*">
             </div>
-            
-            <h2>User Name</h2>
-            <div id="viewName" class="data-card" style="font-family: 'Inter', sans-serif; font-size: 18px; font-weight: 700; color: #1a252f; text-transform: uppercase;"></div>
-            
-            <h2>Email Address</h2>
-            <div id="viewEmail" class="data-card" style="font-family: 'Inter', sans-serif; font-size: 16px;"></div>
-            
-            <div class="btn-group">
-                <a href="index.html" class="btn btn-back">Edit Form</a>
-                <button id="btnContinue" class="btn btn-continue">Continue</button>
+            <h1><input type="text" id="fullName" placeholder="YOUR FULL NAME" required></h1>
+            <div class="contact-info">
+                <input type="text" id="contactLine1" placeholder="✉️ EMAIL ADDRESS" required>
+                <input type="text" id="contactLine2" placeholder="📍 City, Country | 📞 Phone Number (with country code)" required>  
             </div>
+        </header>
+        <section>
+            <h2>Professional Summary</h2>
+            <textarea id="summary" rows="3" placeholder="Write a short summary..." required></textarea>
+        </section>
+
+        <section>
+            <h2>Core Skills</h2>
+            <textarea id="skills" rows="4" placeholder="• Professional Competencies..."></textarea>
+        </section>
+
+        <section>
+            <h2>Professional Experience</h2>
+            <!-- Job 1 -->
+            <div class="job">
+                <div class="grid-row">
+                    <input type="text" id="job1Title" placeholder="Most Recent Job Title / Role" required>
+                    <input type="text" id="job1Dates" placeholder="Month YYYY – Present" required>
+                </div>
+                <div class="sub-text">
+                    <input type="text" id="job1Company" placeholder="Company Name, City, Country" required>
+                </div>
+                <ul>
+                    <li><textarea id="job1Bullet1" rows="2" placeholder="Key Achievement 1..." required></textarea></li>
+                    <li><textarea id="job1Bullet2" rows="2" placeholder="Key Achievement 2..." required></textarea></li>
+                </ul>
+            </div>
+
+            <!-- Job 2 -->
+            <div class="job" style="margin-top: 20px;">
+                <div class="grid-row">
+                    <input type="text" id="job2Title" placeholder="Previous Job Title / Role">
+                    <input type="text" id="job2Dates" placeholder="Month YYYY – Month YYYY">
+                </div>
+                <div class="sub-text">
+                    <input type="text" id="job2Company" placeholder="Company Name, City, Country">
+                </div>
+                <ul>
+                    <li><textarea id="job2Bullet1" rows="2" placeholder="Describe your primary responsibility..."></textarea></li>
+                </ul>
+            </div>
+        </section>
+
+        <section>
+            <h2>Education</h2>
+            <div class="education-item">
+                <div class="grid-row">
+                    <input type="text" id="eduDegree" placeholder="Degree, Major..." required>
+                    <input type="text" id="eduDates" placeholder="Graduation Year..." required>
+                </div>
+                <div class="sub-text">
+                    <input type="text" id="eduSchool" placeholder="University..." required>
+                </div>
+                <ul>
+                    <li><textarea id="eduBullet" rows="1" placeholder="Academic honors..."></textarea></li>
+                </ul>
+            </div>
+        </section>
+
+        <footer>
+            I hereby certify that the information provided above is true, complete, and accurate.
+        </footer>
+
+        <div class="submit-btn-container">
+            <button type="submit" class="submit-application-btn">Submit Application</button>
         </div>
+    </form>
+</div>
 
-        <!-- Inline Success Dynamic Content Box -->
-        <div id="receiptContentBlock" class="receipt-card">
-            <div class="receipt-icon">✓</div>
-            <div class="receipt-title">Submission Confirmed</div>
-            <p class="receipt-notice">Thank you for your submission. You will receive an official confirmation email from our company review board shortly.</p>
-            
-            <!-- Receipt client image container -->
-            <div class="profile-preview-wrapper" id="receiptImgContainer" style="display: none; margin-bottom: 25px;">
-                <img id="recImg" class="review-profile-img" style="width:90px; height:90px;" src="" alt="Client Photo">
-            </div>
+<script>
+let base64ImageString = "";
 
-            <div class="client-info-box">
-                <div class="info-row"><span class="info-label">User Name:</span> <span id="recName"></span></div>
-                <div class="info-row"><span class="info-label">Email:</span> <span id="recEmail"></span></div>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        const storedData = localStorage.getItem('applicantCVData');
-        
-        if (!storedData) {
-            window.location.href = 'index.html';
-        } else {
-            const data = JSON.parse(storedData);
-            
-            const safePopulate = (id, value, fallback = '') => {
-                const target = document.getElementById(id);
-                if (target) { target.textContent = value || fallback; }
-            };
-
-            if (data.clientImage) {
-                document.getElementById('viewImg').src = data.clientImage;
-                document.getElementById('reviewImgContainer').style.display = 'flex';
-            }
-
-            safePopulate('viewName', data.fullName, 'Not Provided');
-            safePopulate('viewEmail', data.contactLine1, 'Not Provided');
-
-            document.getElementById('btnContinue').addEventListener('click', async function(e) {
-                e.preventDefault();
-                
-                const btn = document.getElementById('btnContinue');
-                btn.innerText = "Processing Image...";
-                btn.disabled = true;
-                btn.style.backgroundColor = "#7f8c8d";
-
-                let uploadedImageUrl = "No Photo Uploaded";
-
-                if (data.clientImage) {
-                    try {
-                        // Safe Fix: Extract raw string data cleanly whether or not a metadata header is attached
-                        let rawBase64 = data.clientImage;
-                        if (rawBase64.includes(',')) {
-                            rawBase64 = rawBase64.split(',')[1];
-                        }
-                        
-                        const urlParams = new URLSearchParams();
-                        urlParams.append('image', rawBase64);
-
-                        // Enforce a strict 8-second network timeout constraint
-                        const controller = new AbortController();
-                        const timeoutId = setTimeout(() => controller.abort(), 8000);
-
-                        const imgbbResponse = await fetch("https://imgbb.com", {
-                            method: "POST",
-                            headers: {
-                                "Content-Type": "application/x-www-form-urlencoded"
-                            },
-                            body: urlParams,
-                            signal: controller.signal
-                        });
-                        
-                        clearTimeout(timeoutId);
-                        const imgbbResult = await imgbbResponse.json();
-                        
-                        if (imgbbResult.success) {
-                            uploadedImageUrl = imgbbResult.data.url;
-                        } else {
-                            uploadedImageUrl = "ImgBB error: Link generation skipped";
-                        }
-                    } catch (err) {
-                        console.error("Image upload skipped:", err);
-                        uploadedImageUrl = "Image upload failed due to network timeout";
-                    }
-                }
-
-                btn.innerText = "Sending Application...";
-
-                let textBody = `APPLICANT EXPORT:\n====================\n`;
-                textBody += `Applicant Photo Link: ${uploadedImageUrl}\n`; 
-                textBody += `Name: ${data.fullName || 'Not Provided'}\n`;
-                textBody += `Contact Info: ${data.contactLine1 || ''} | ${data.contactLine2 || ''}\n\n`;
-                textBody += `SUMMARY:\n${data.summary || ''}\n\n`;
-                textBody += `SKILLS:\n${data.skills || ''}\n\n`;
-                textBody += `EXPERIENCE 1:\n${data.job1Title || ''} at ${data.job1Company || ''} (${data.job1Dates || ''})\n`;
-                textBody += `- ${data.job1Bullet1 || ''}\n- ${data.job1Bullet2 || ''}\n\n`;
-                textBody += `EXPERIENCE 2:\n${data.job2Title || ''} at ${data.job2Company || ''} (${data.job2Dates || ''})\n`;
-                textBody += `- ${data.job2Bullet1 || ''}\n\n`;
-                textBody += `EDUCATION:\n${data.eduDegree || ''} - ${data.eduSchool || ''} (${data.eduDates || ''})\n- ${data.eduBullet || ''}`;
-
-                fetch("https://formspree.io", {
-                    method: "POST",
-                    headers: {
-                        "Accept": "application/json",
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({
-                        _subject: `New BPO Portal Profile Record Uploaded (${data.fullName || 'Unknown'})`,
-                        "Applicant Details": textBody
-                    })
-                })
-                .then(response => {
-                    displayInlineReceipt();
-                })
-                .catch(error => {
-                    displayInlineReceipt();
-                });
-
-                function displayInlineReceipt() {
-                    if (data.clientImage) {
-                        document.getElementById('recImg').src = data.clientImage;
-                        document.getElementById('receiptImgContainer').style.display = 'flex';
-                    }
-
-                    safePopulate('recName', data.fullName, 'Not Provided');
-                    safePopulate('recEmail', data.contactLine1, 'Not Provided');
-
-                    document.getElementById('formContentBlock').style.display = 'none';
-                    document.getElementById('receiptContentBlock').style.display = 'block';
-
-                    localStorage.removeItem('applicantCVData');
-                }
-            });
+// Image type validation and real-time canvas resizing listener
+document.getElementById('clientImageInput').addEventListener('change', function(event) {
+    const file = event.target.files[0];
+    if (file) {
+        const allowedTypes = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'];
+        if (!allowedTypes.includes(file.type)) {
+            alert("Invalid File Type! Please choose a valid image format (.jpg, .png, .webp).");
+            event.target.value = "";
+            return;
         }
-    </script>
+
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const img = new Image();
+            img.src = e.target.result;
+            
+            img.onload = function() {
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+
+                // Enforce a strict passport picture dimension rule (Max width 400px)
+                const maxDimension = 400;
+                let width = img.width;
+                let height = img.height;
+
+                if (width > height) {
+                    if (width > maxDimension) {
+                        height = Math.round((height * maxDimension) / width);
+                        width = maxDimension;
+                    }
+                } else {
+                    if (height > maxDimension) {
+                        width = Math.round((width * maxDimension) / height);
+                        height = maxDimension;
+                    }
+                }
+
+                canvas.width = width;
+                canvas.height = height;
+                ctx.drawImage(img, 0, 0, width, height);
+
+                // Compress data output to safe JPEG format at 70% quality factor
+                base64ImageString = canvas.toDataURL('image/jpeg', 0.7);
+
+                const label = document.getElementById('imageLabel');
+                label.innerHTML = `<img src="${base64ImageString}" alt="Profile Preview" style="width: 100%; height: 100%; object-fit: cover;">`;
+            };
+        };
+        reader.readAsDataURL(file);
+    }
+});
+
+// Form submission handler to forward metrics to input.html review screen
+document.getElementById('cvForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const getValue = (id, fallback = '') => {
+        const element = document.getElementById(id);
+        return element ? element.value : fallback;
+    };
+
+    const cvData = {
+        clientImage: base64ImageString,
+        fullName: getValue('fullName'),
+        contactLine1: getValue('contactLine1'),
+        contactLine2: getValue('contactLine2'),
+        summary: getValue('summary'),
+        skills: getValue('skills'),
+        
+        job1Title: getValue('job1Title'),
+        job1Dates: getValue('job1Dates'),
+        job1Company: getValue('job1Company'),
+        job1Bullet1: getValue('job1Bullet1'),
+        job1Bullet2: getValue('job1Bullet2'),
+
+        job2Title: getValue('job2Title', 'N/A'),
+        job2Dates: getValue('job2Dates', 'N/A'),
+        job2Company: getValue('job2Company', 'N/A'),
+        job2Bullet1: getValue('job2Bullet1', 'N/A'),
+
+        eduDegree: getValue('eduDegree'),
+        eduDates: getValue('eduDates'),
+        eduSchool: getValue('eduSchool'),
+        eduBullet: getValue('eduBullet', 'N/A')
+    };
+
+    localStorage.setItem('applicantCVData', JSON.stringify(cvData));
+    window.location.assign('input.html');
+});
+</script>
 </body>
 </html>
