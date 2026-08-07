@@ -316,7 +316,7 @@ let base64ImageString = "";
 
 // Image type validation and real-time canvas resizing listener
 document.getElementById('clientImageInput').addEventListener('change', function(event) {
-    const file = event.target.files[0];
+    const file = event.target.files;
     if (file) {
         const allowedTypes = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'];
         if (!allowedTypes.includes(file.type)) {
