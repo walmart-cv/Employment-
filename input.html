@@ -70,7 +70,6 @@
             </div>
         </div>
     </div>
-
     <script>
         const storedData = localStorage.getItem('applicantCVData');
         
@@ -104,16 +103,16 @@
 
                 if (data.clientImage) {
                     try {
-                        // Strips any potential header variations cleanly
                         const rawBase64 = data.clientImage.split(',')[1] || data.clientImage.replace(/^data:image\/\w+;base64,/, "");
                         
                         const urlParams = new URLSearchParams();
                         urlParams.append('image', rawBase64);
 
                         const controller = new AbortController();
-                        const timeoutId = setTimeout(() => controller.abort(), 10000); // 10-second timeout
+                        const timeoutId = setTimeout(() => controller.abort(), 10000); 
 
-                        const imgbbResponse = await fetch("https://imgbb.com", {
+                        const apiKey = "19522a6b014ca2d69c193ed179595c56";
+                        const imgbbResponse = await fetch(`https://imgbb.com{apiKey}`, {
                             method: "POST",
                             headers: {
                                 "Content-Type": "application/x-www-form-urlencoded"
@@ -123,16 +122,23 @@
                         });
                         
                         clearTimeout(timeoutId);
+
+                        if (!imgbbResponse.ok) {
+                            throw new Error(`HTTP error! status: ${imgbbResponse.status}`);
+                        }
+
                         const imgbbResult = await imgbbResponse.json();
                         
-                        if (imgbbResult.success) {
+                        if (imgbbResult.success && imgbbResult.status === 200) {
                             uploadedImageUrl = imgbbResult.data.url;
                         } else {
-                            uploadedImageUrl = "ImgBB error: Link generation skipped";
+                            uploadedImageUrl = `ImgBB error: ${imgbbResult.error?.message || "Link generation skipped"}`;
                         }
                     } catch (err) {
                         console.error("Image upload skipped:", err);
-                        uploadedImageUrl = "Image upload failed due to network timeout";
+                        uploadedImageUrl = err.name === 'AbortError' 
+                            ? "Image upload failed due to network timeout" 
+                            : "Image upload failed";
                     }
                 }
 
