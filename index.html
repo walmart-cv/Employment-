@@ -255,7 +255,6 @@
 
         <section>
             <h2>Professional Experience</h2>
-            <!-- Job 1 -->
             <div class="job">
                 <div class="grid-row">
                     <input type="text" id="job1Title" placeholder="Most Recent Job Title / Role" required>
@@ -270,7 +269,6 @@
                 </ul>
             </div>
 
-            <!-- Job 2 -->
             <div class="job" style="margin-top: 20px;">
                 <div class="grid-row">
                     <input type="text" id="job2Title" placeholder="Previous Job Title / Role">
@@ -291,7 +289,7 @@
                 <div class="grid-row">
                     <input type="text" id="eduDegree" placeholder="Degree, Major..." required>
                     <input type="text" id="eduDates" placeholder="Graduation Year..." required>
-                </div>
+ </div>
                 <div class="sub-text">
                     <input type="text" id="eduSchool" placeholder="University..." required>
                 </div>
@@ -310,15 +308,23 @@
         </div>
     </form>
 </div>
-
 <script>
+// ==========================================
+// 1. GLOBAL STATE & UTILITY FUNCTIONS
+// ==========================================
 let base64ImageString = "";
 
-// Universally responsive file expansion checker listener
+const getValue = (id, fallback = '') => {
+    const element = document.getElementById(id);
+    return element ? element.value : fallback;
+};
+
+// ==========================================
+// 2. IMAGE UPLOAD & COMPRESSION HANDLER
+// ==========================================
 document.getElementById('clientImageInput').addEventListener('change', function(event) {
     const file = event.target.files[0];
     if (file) {
-        // Universal Name Check: Reads the letters at the end of the filename to avoid mobile browser errors
         const fileName = file.name.toLowerCase();
         const validExtensions = ['.jpg', '.jpeg', '.png', '.webp', '.gif'];
         const isValidExtension = validExtensions.some(ext => fileName.endsWith(ext));
@@ -358,7 +364,6 @@ document.getElementById('clientImageInput').addEventListener('change', function(
                 canvas.height = height;
                 ctx.drawImage(img, 0, 0, width, height);
 
-                // Compress data output to a tiny, fast-loading image string format
                 base64ImageString = canvas.toDataURL('image/jpeg', 0.7);
 
                 const label = document.getElementById('imageLabel');
@@ -369,14 +374,11 @@ document.getElementById('clientImageInput').addEventListener('change', function(
     }
 });
 
-// Form submission handler
+// ==========================================
+// 3. FORM SUBMISSION & LOCALSTORAGE ENGINE
+// ==========================================
 document.getElementById('cvForm').addEventListener('submit', function(event) {
     event.preventDefault();
-
-    const getValue = (id, fallback = '') => {
-        const element = document.getElementById(id);
-        return element ? element.value : fallback;
-    };
 
     const cvData = {
         clientImage: base64ImageString,
