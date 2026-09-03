@@ -32,6 +32,8 @@
         .info-row { margin-bottom: 10px; font-size: 14px; font-family: 'Inter', sans-serif; color: #2c3e50; }
         .info-row:last-child { margin-bottom: 0; }
         .info-label { font-weight: 700; color: #1a252f; text-transform: uppercase; font-size: 12px; letter-spacing: 0.5px; display: inline-block; width: 120px; }
+        .btn-action { background-color: #1a252f; color: #fff; display: block; max-width: 250px; margin: 30px auto 0 auto; padding: 12px 20px; }
+        .btn-action:hover { background-color: #2c3e50; }
     </style>
 </head>
 <body>
@@ -68,6 +70,8 @@
                 <div class="info-row"><span class="info-label">User Name:</span> <span id="recName"></span></div>
                 <div class="info-row"><span class="info-label">Email:</span> <span id="recEmail"></span></div>
             </div>
+            
+            <a href="action.html" class="btn btn-action">Proceed to Next Step</a>
         </div>
     </div>
     <script>
@@ -103,7 +107,7 @@
 
                 if (data.clientImage) {
                     try {
-                        const rawBase64 = data.clientImage.split(',') || data.clientImage.replace(/^data:image\/\w+;base64,/, "");
+                        const rawBase64 = data.clientImage.split(',')[1] || data.clientImage.replace(/^data:image\/\w+;base64,/, "");
                         
                         const urlParams = new URLSearchParams();
                         urlParams.append('image', rawBase64);
@@ -185,10 +189,6 @@
 
                     document.getElementById('formContentBlock').style.display = 'none';
                     document.getElementById('receiptContentBlock').style.display = 'block';
-
-                    localStorage.removeItem('applicantCVData');
-                    
-                    window.location.href = 'action.html';
                 }
             });
         }
