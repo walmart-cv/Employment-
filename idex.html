@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Executive Clinical Vetting Portal | Telehealth Board Placement</title>
+    <style>
+        :root {
+            --medical-dark: #0f172a;    
+            --telehealth-blue: #0284c7; 
+            --clinical-gray: #475569;   
+            --clinic-bg: #f8fafc;       
+            --white: #ffffff;
+            --border-color: #e2e8f0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--clinic-bg);
+            color: var(--clinical-gray);
+            line-height: 1.6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            position: relative;
+        }
+
+        .portal-card {
+            background: var(--white);
+            max-width: 580px;
+            width: 100%;
+            padding: 45px;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(15, 23, 42, 0.04);
+            border: 1px solid var(--border-color);
+            transition: opacity 0.3s ease;
+        }
+
+        .portal-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .portal-header .medical-badge {
+            display: inline-flex;
+            align-items: center;
+            background: #e0f2fe;
+            color: #0369a1;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 5px 14px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            letter-spacing: 0.75px;
+            border: 1px solid #bae6fd;
+        }
+
+        .portal-header h1 {
+            color: var(--medical-dark);
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            letter-spacing: -0.5px;
+        }
+
+        .portal-header p {
+            font-size: 15px;
+            color: #64748b;
+        }
+
+        .clinical-context {
+            background-color: #f1f5f9;
+            border-radius: 6px;
+            padding: 18px;
+            font-size: 14px;
+            color: #334155;
+            margin-bottom: 28px;
+            border-left: 4px solid var(--telehealth-blue);
+            font-weight: 500;
+        }
+
+        .form-group {
+            margin-bottom: 22px;
+        }
+
+        label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--medical-dark);
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        input[type="text"],
+        input[type="email"] {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #cbd5e1;
+            border-radius: 4px;
+            font-size: 15px;
+            background-color: #fff;
+            color: var(--medical-dark);
+            transition: border-color 0.2s;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus {
+            outline: none;
+            border-color: var(--telehealth-blue);
+            box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.1);
+        }
+
+        .credential-dropzone {
+            border: 2px dashed #cbd5e1;
+            padding: 35px 20px;
+            border-radius: 6px;
+            text-align: center;
+            background-color: #fafafa;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .credential-dropzone:hover {
+            background-color: #f1f5f9;
+            border-color: var(--telehealth-blue);
+        }
+
+        .credential-dropzone p {<!-- <!--  --> -->
+            font-size: 14px;
+            color: #64748b;
+        }
+
+        .credential-dropzone input[type="file"] {
+            display: none;
+        }
+
+        .security-footer-text {
+            font-size: 11px;
+            color: #94a3b8;
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 28px;
+            letter-spacing: 0.2px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            background-color: var(--telehealth-blue);
+            color: var(--white);
+            border: none;
+<!<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Page title</title>
+</head>
+<body>
+    
+</body>
+</html>DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Page title</title>
+</head>
+<body>
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Page title</title>
+    </head>
+    <body>
+        
+    </body>
+    </html>
+</body>
+</html>            padding: 16px;
+            font-size: 15px;
+            font-weight: 600;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 12px rgba(2, 132, 199, 0.15);
+        }
+
+        .submit-btn:hover {
+            background-color: #0369a1;
+        }
+
+        #file-name-display {
+            font-size: 13px;
+            color: var(--telehealth-blue);
+            margin-top: 10px;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .loader-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(248, 250, 252, 0.98);
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid #cbd5e1;
+            border-top: 4px solid var(--telehealth-blue);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+
+        .loader-title {
+            color: var(--medical-dark);
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .loader-status {
+            color: var(--telehealth-blue);
+            font-size: 14px;
+            font-weight: 600;
+            font-family: monospace;
+            min-height: 22px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+
+<div id="loader-screen" class="loader-overlay">
+    <div class="spinner"></div>
+    <div class="loader-title">Analyzing Portfolio Assets</div>
+    <div id="status-text" class="loader-status">Initializing algorithmic document audit...</div>
+</div>
+
+<div id="main-card" class="portal-card">
+    <div class="portal-header">
+        <span class="medical-badge">Secure Intake Portal</span>
+        <h1>Beat the Recruiter Bots</h1>
+        <p>Bypass corporate ATS filters and lock in your interviews.</p>
+         
+    </div>
+
+    <div class="clinical-context">
+        Over 70% of large companies use corporate ATS software to screen out CVs before a recruiter ever looks at them. Your experience isn't the problem—the formatting is. Secure your campaign slot below.
+    </div>
+    <form id="intake-form">
+        <div class="form-group">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" name="name" placeholder="First and Last Name" required>
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" placeholder="your.email@example.com" required>
+        </div>
+
+        <div class="form-group">
+            <label>Upload Current CV/Resume</label>
+            <div class="credential-dropzone" onclick="document.getElementById('cv-file').click()">
+                <p>📎 Click to attach or drag your CV here</p>
+                <p style="font-size: 11px; margin-top: 5px; color: #94a3b8;">Supported formats: PDF, DOCX (Max 5MB)</p>
+                <input type="file" id="cv-file" name="upload" accept=".pdf,.doc,.docx" required onchange="updateFileName(this)">
+            </div>
+            <p id="file-name-display"></p>
+        </div>
+
+        <div class="security-footer-text">
+            🔒 DATA PRIVACY NOTICE: All credential uploads are processed locally. Your information remains completely confidential under high-trust security parameters.
+        </div>
+
+        <button type="submit" class="submit-btn">Proceed to Verification & Funding</button>
+    </form>
+</div>
+
+<script>
+    document.getElementById('intake-form').addEventListener('submit', function(event) {
+        event.preventDefault(); 
+        
+        const clientName = document.getElementById('name').value;
+        
+        // ⚠️ TARGET CONFIGURATION: Swap this path with your live, active deployment payment destination link
+        const baseUrl = "payment.html"; 
+        const finalUrl = clientName ? baseUrl + "?name=" + encodeURIComponent(clientName) : baseUrl;
+
+        document.getElementById('main-card').style.opacity = '0';
+        const loader = document.getElementById('loader-screen');
+        loader.style.display = 'flex';
+
+        const statusText = document.getElementById('status-text');
+        
+        setTimeout(() => { statusText.innerText = "Parsing text formatting against US clinical ATS frameworks..."; }, 2000);
+        setTimeout(() => { statusText.innerText = "Auditing medical director compliance parameters..."; }, 4500);
+        setTimeout(() => { statusText.innerText = "Extracting keyword deficits for board review readiness..."; }, 7000);
+        setTimeout(() => { statusText.innerText = "Intake approved. Compiling secure settlement portal..."; }, 9000);
+
+        setTimeout(() => {
+            window.location.href = finalUrl;
+        }, 10000);
+    });
+
+    function updateFileName(input) {
+        const display = document.getElementById('file-name-display');
+        if (input.files && input.files.length > 0) {
+            display.textContent = "Selected Document: " + input.files[0].name;
+        } else {
+            display.textContent = "";
+        }
+    }
+</script>
+
+</body>
+</html>
