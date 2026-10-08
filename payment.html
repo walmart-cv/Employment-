@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Settlement Portal</title>
+    <style>
+        :root { --dark: #0f172a; --blue: #0284c7; --gray: #475569; --bg: #f8fafc; --white: #fff; --border: #e2e8f0; --green: #15803d; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: sans-serif; }
+        body { background: var(--bg); color: var(--gray); display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; font-size: 14px; }
+        .card { background: var(--white); max-width: 540px; width: 100%; padding: 25px; border-radius: 8px; border: 1px solid var(--border); box-shadow: 0 4px 20px rgba(15,23,42,0.04); }
+        .header { text-align: center; margin-bottom: 15px; border-bottom: 2px dashed var(--border); padding-bottom: 12px; }
+        .status { display: inline-flex; background: #f0fdf4; color: var(--green); font-size: 15px; font-weight: 800; padding: 4px 12px; border-radius: 4px; text-transform: uppercase; margin-bottom: 8px; border: 1px solid #bbf7d0; }
+        .header h1 { color: var(--dark); font-size: 19px; font-weight: 800; }
+        .client-welcome { font-size: 13px; font-weight: 800; color: var(--blue); margin-top: 5px; background: #f0f9ff; display: none; padding: 4px 12px; border-radius: 4px; border: 1px solid #e0f2fe; }
+        .intake-text-box { font-size: 13.5px; line-height: 1.5; margin-bottom: 15px; white-space: pre-line; }
+        .summary { background: #f8fafc; border: 1px solid var(--border); border-radius: 6px; padding: 12px; margin-bottom: 15px; }
+        .row { display: flex; justify-content: space-between; margin-bottom: 4px; }
+        .row:last-child { margin-bottom: 0; padding-top: 4px; border-top: 1px solid var(--border); font-weight: 800; color: var(--dark); }
+        .heading { font-size: 11px; color: var(--blue); margin: 15px 0 4px 0; text-transform: uppercase; font-weight: 800; letter-spacing: 0.5px; }
+        .box { border: 1px solid var(--border); border-radius: 6px; overflow: hidden; margin-bottom: 10px; }
+        .d-row { display: flex; border-bottom: 1px solid var(--border); cursor: pointer; position: relative; background: #fff; }
+        .d-row:hover { background: #f8fafc; }
+        .d-row:last-child { border-bottom: none; }
+        .lbl { width: 35%; background: #f1f5f9; padding: 8px 12px; font-weight: 800; font-size: 10px; text-transform: uppercase; color: var(--dark); display: flex; align-items: center; }
+        .val { width: 65%; padding: 8px 12px; font-family: monospace; font-weight: 800; color: var(--dark); display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+        .c-btn { background: #e2e8f0; border: none; color: var(--gray); padding: 2px 6px; font-size: 10px; font-weight: 800; border-radius: 4px; cursor: pointer; }
+        .d-row:hover .c-btn { background: var(--blue); color: white; }
+        .toast { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); background: var(--green); color: white; font-size: 10px; padding: 2px 6px; border-radius: 4px; font-weight: bold; opacity: 0; transition: opacity 0.15s; pointer-events: none; }
+        .toast.show { opacity: 1; }
+        .hint { font-size: 11px; color: #94a3b8; text-align: center; margin-bottom: 15px; }
+        .note { font-size: 12px; background: #fff9db; border: 1px solid #ffe3e3; padding: 12px; border-radius: 6px; }
+        .seal { font-size: 10px; color: #94a3b8; text-align: center; margin-top: 20px; border-top: 1px solid var(--border); padding-top: 10px; font-weight: 800; }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <div class="header">
+        <span class="status">Intake Approved</span>
+        <h1>Secure Settlement Portal</h1>
+        <p style="font-size:12px; color:var(--gray); margin-top:2px;">Executive Retainer Invoice</p>
+        <div id="client" class="client-welcome"></div>
+    </div>
+
+    <div class="intake-text-box">
+        We have safely received your CVs details through our secure portal. Thank you for completing the initial intake form.
+        Because we limit our specialized executive sprints to only two Cvs per month to maintain absolute precision, slots are locked in strictly upon payment confirmation
+
+        <strong>Retainer Invoice Summary:</strong>
+        - Service: Bypass corporate ATS filters bots & Board Review Positioning<br>
+        <strong>- Flat Fee: $500 USD</strong>
+
+        <strong>How to Complete Secure Payment:</strong>
+        Since we are running this as a direct, zero-friction executive campaign this week, please process your flat fee manually using our secure payment handle below:
+
+        <strong>[Choose your method below ]:</strong>
+    </div>
+
+    <div class="summary">
+        <div class="row"><span>Sprint Retainer:</span><span>$500.00 USD</span></div>
+        <div class="row"><span>Total Due:</span><span>$500.00 USD</span></div>
+    </div>
+
+    <div class="heading">Option A: Normal Bank Payment (Raenest ACH)</div>
+    <div class="box">
+        <div class="d-row" onclick="cp(this)"><div class="lbl">Account Name</div><div class="val"><span>Jeremiah Ohiri</span><button class="c-btn">Copy</button></div></div>
+        <div class="d-row" onclick="cp(this)"><div class="lbl">Bank Name</div><div class="val"><span>Lead Bank</span><button class="c-btn">Copy</button></div></div>
+        <div class="d-row" onclick="cp(this)"><div class="lbl">Account No</div><div class="val"><span>216917380639</span><button class="c-btn">Copy</button></div></div>
+        <div class="d-row" onclick="cp(this)"><div class="lbl">Routing No</div><div class="val"><span>101019644</span><button class="c-btn">Copy</button></div></div>
+        <div class="d-row"><div class="lbl">Transfer Type</div><div class="val" style="font-family:inherit; font-size:12px; color:#64748b;">US ACH Local Transfer Only</div></div>
+    </div>
+
+    <div class="heading">Option B: Crypto Stablecoin (USDC)</div>
+    <div class="box">
+        <div class="d-row" onclick="cp(this)"><div class="lbl">Address</div><div class="val"><span style="font-size:11px; word-break:break-all;">0x239a99a072e5104466e789fb8e6a7a4434BdA42C</span><button class="c-btn">Copy</button></div></div>
+        <div class="d-row"><div class="lbl">Network Layer</div><div class="val" style="font-family:inherit;">Base Network</div></div>
+        <div class="d-row"><div class="lbl">Settlement</div><div class="val" style="font-family:inherit; font-size:12px; color:#64748b;">Transfer exactly 500 USDC</div></div>
+    </div>
+
+    <div class="heading">Option C: Wire Bank Payment (Raenest Wire)</div>
+    <div class="box">
+        <div class="d-row" onclick="cp(this)"><div class="lbl">Account Name</div><div class="val"><span>Jeremiah Ohiri</span><button class="c-btn">Copy</button></div></div>
+        <div class="d-row" onclick="cp(this)"><div class="lbl">Bank Name</div><div class="val"><span>Lead Bank</span><button class="c-btn">Copy</button></div></div>
+        <div class="d-row" onclick="cp(this)"><div class="lbl">Account No</div><div class="val"><span>216917380639</span><button class="c-btn">Copy</button></div></div>
+        <div class="d-row" onclick="cp(this)"><div class="lbl">Routing No</div><div class="val"><span>101019644</span><button class="c-btn">Copy</button></div></div>
+        <div class="d-row"><div class="lbl">Transfer Type</div><div class="val" style="font-family:inherit; font-size:12px; color:#64748b;">Domestic Wire Transfer Only</div></div>
+    </div>
+
+    <p class="hint">ℹ Tap any row or click "Copy" to grab details.</p>
+
+    <div class="note">
+        ⚠️ <strong>Next Step:</strong> Once the transfer is processed, please send a snapshot or wire receipt confirmation directly to your intake coordinator to lock your spot.<br>
+        <br>The moment receipt is verified, your portal slot will transition to "Active." Your completely overhauled, board-ready executive portfolio will be delivered directly to your inbox within 5 business days.<br><br>
+Welcome to the sprint, and let’s get you positioned for these top-tier US remote roles.<br><br>Intake coordinator<br>Email: Walmart_admins@protonmail.com
+    </div>
+
+    <div class="seal">🔒 SECURE BILLING GATEWAY • NATIONAL BANKING WIRE, ACH, AND ENCRYPTED NETWORKS</div>
+</div>
+
+<script>
+    function cp(r) {
+        const s = r.querySelector('.val span');
+        if (!s) return;
+        navigator.clipboard.writeText(s.innerText).then(() => {
+            let t = r.querySelector('.toast') || document.createElement('div');
+            t.className = 'toast'; t.innerText = 'Copied!'; r.appendChild(t);
+            t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 1200);
+        });
+    }
+    window.addEventListener('DOMContentLoaded', () => {
+        const n = new URLSearchParams(window.location.search).get('name');
+        if (n) {
+            const d = document.getElementById('client');
+            d.textContent = "Prepared for: " + decodeURIComponent(n).replace(/\+/g, ' ');
+            d.style.display = 'inline-block';
+        }
+    });
+</script>
+
+</body>
+</html>
