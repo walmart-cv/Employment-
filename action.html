@@ -133,12 +133,14 @@
         .file-upload-box input[type="file"] {
             display: none;
         }
-         .form-group { margin-bottom: 1.25rem; }
-         label { display: block; font-weight: 600; margin-bottom: 0.5rem; font-size: 0.9rem; }
+        
+        .form-group { margin-bottom: 1.25rem; }
+        label { display: block; font-weight: 600; margin-bottom: 0.5rem; font-size: 0.9rem; }
         input[type="text"], input[type="email"], textarea, input[type="file"] { width: 100%; padding: 0.75rem; border: 1px solid #d1d5db; border-radius: 6px; box-sizing: border-box; font-size: 1rem; }
         textarea { height: 120px; resize: vertical; }
         button { background-color: #2563eb; color: white; border: none; padding: 0.75rem 1.5rem; font-size: 1rem; font-weight: 600; border-radius: 6px; width: 100%; cursor: pointer; transition: background 0.2s; }
         button:hover { background-color: #1d4ed8; }
+        
         .privacy-seal {
             font-size: 12px;
             color: #94a3b8;
@@ -237,6 +239,43 @@
             border-radius: 4px;
             text-transform: uppercase;
         }
+
+        /* Full Screen Spinner Overlay Styles */
+        .loader-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(15, 23, 42, 0.95);
+            z-index: 9999;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #ffffff;
+        }
+        .loading-circle {
+            width: 60px; height: 60px;
+            border: 5px solid #334155;
+            border-top: 5px solid #2563eb;
+            border-radius: 50%;
+            animation: spinProgress 1s linear infinite;
+            margin-bottom: 20px;
+        }
+        @keyframes spinProgress {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .loading-status-text {
+            font-weight: 600;
+            font-size: 16px;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+            color: #ffffff;
+        }
+        .loading-subtext {
+            font-size: 13px;
+            color: #94a3b8;
+            font-family: monospace;
+        }
     </style>
 </head>
 <body>
@@ -251,11 +290,8 @@
     <div class="message-context">
         Over 70% of large companies use corporate ATS software to screen out CVs before a recruiter ever looks at them. Your experience isn't the problem—the formatting is. Secure your campaign slot below.
     </div>
-    <!-- ⚠️ ATTENTION: Replace 'YOUR_FORMSPREE_ID' with the Formspree endpoint you get in Step 2 -->
-    <!-- Locate the <form> tag inside your action.html file and change its action attribute like this: -->
-<form action="payment.html" method="GET">
 
-        
+    <form action="payment.html" method="GET">
         <div class="form-group">
             <label for="name">Full Name</label>
             <input type="text" id="name" name="name" placeholder="First and Last Name" required>
@@ -310,7 +346,13 @@
             </div>
         </div>
 
-        <!-- ⚠️ OPTIONAL: Enter your redirection page (like a WhatsApp chat link or a thank-you page) -->
+        <!-- Custom 15-Second Screen Loader Container -->
+        <div id="uploadLoader" class="loader-overlay">
+            <div class="loading-circle"></div>
+            <p id="loaderMainText" class="loading-status-text">Uploading files safely...</p>
+            <p id="loaderSubText" class="loading-subtext">[STATUS: CONNECTING_TO_PARSER]</p>
+        </div>
+
         <input type="hidden" name="_next" value="payment.html">
 
         <div class="privacy-seal">
@@ -332,7 +374,6 @@
     }
 
     function selectPlan(planId) {
-        // Uncheck all radio inputs inside the grid and remove selected classes
         document.querySelectorAll('.pricing-card').forEach(card => {
             card.classList.remove('selected');
         });
@@ -341,8 +382,30 @@
         radio.checked = true;
         radio.closest('.pricing-card').classList.add('selected');
     }
+
+    // Handles form submission intercept and custom 15-second message intervals
+    document.querySelector('form').addEventListener('submit', function(event) {
+        event.preventDefault(); 
+        
+        const loader = document.getElementById('uploadLoader');
+        const mainText = document.getElementById('loaderMainText');
+        const subText = document.getElementById('loaderSubText');
+        
+        loader.style.display = 'flex'; 
+        
+        // Customized dynamic update updates across the 15000ms duration
+        setTimeout(() => { mainText.textContent = "Analyzing document visual geometry..."; subText.textContent = "[STATUS: SCANNING_COLUMNS_AND_BOXES]"; }, 2500);
+        setTimeout(() => { mainText.textContent = "Extracting raw profile text content..."; subText.textContent = "[STATUS: STRIPPING_GRAPHIC_NOISE]"; }, 5500);
+        setTimeout(() => { mainText.textContent = "Cross-referencing core market keywords..."; subText.textContent = "[STATUS: MATCHING_TARGET_JOB_DESC]"; }, 8500);
+        setTimeout(() => { mainText.textContent = "Validating layout compliance scores..."; subText.textContent = "[STATUS: CALC_ATS_PASS_PROBABILITY]"; }, 11500);
+        setTimeout(() => { mainText.textContent = "Finalizing parsing compliance metrics..."; subText.textContent = "[STATUS: COMPILING_AUDIT_REPORT]"; }, 13500);
+        
+        // Native submission handoff execute
+        setTimeout(() => {
+            this.submit(); 
+        }, 15000);
+    });
     
-    // Initialize active style on load
     document.addEventListener("DOMContentLoaded", function() {
         selectPlan('plan-premium');
     });
