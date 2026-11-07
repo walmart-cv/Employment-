@@ -291,7 +291,7 @@
         Over 70% of large companies use corporate ATS software to screen out CVs before a recruiter ever looks at them. Your experience isn't the problem—the formatting is. Secure your campaign slot below.
     </div>
 
-    <form action="payment.html" method="GET">
+    <form action="index.html" method="GET">
         <div class="form-group">
             <label for="name">Full Name</label>
             <input type="text" id="name" name="name" placeholder="First and Last Name" required>
@@ -317,34 +317,10 @@
             <textarea id="job-desc" name="job_description" required placeholder="Paste the job requirements here..."></textarea>
         </div>
 
-        <div class="form-group">
-            <label>Select Your Optimization Plan</label>
-            <div class="pricing-grid">
-                <!-- Basic Tier -->
-                <div class="pricing-card" onclick="selectPlan('plan-basic')">
-                    <input type="radio" id="plan-basic" name="tier" value="basic" checked onclick="event.stopPropagation(); selectPlan('plan-basic')">
-                    <div class="pricing-title">Essential Optimization</div>
-                    <div class="pricing-price">$100</div>
-                    <div class="pricing-desc">Core keyword optimization, layout compliance restructuring, and ATS formatting check.</div>
-                </div>
+       
                 
                 <!-- Premium Tier -->
-                <div class="pricing-card selected" onclick="selectPlan('plan-premium')">
-                    <input type="radio" id="plan-premium" name="tier" value="premium" onclick="event.stopPropagation(); selectPlan('plan-premium')">
-                    <div class="pricing-title">Pro Campaign <span class="popular-tag">Popular</span></div>
-                    <div class="pricing-price">$150</div>
-                    <div class="pricing-desc">Full professional rewrite, custom targeted keyword insertion, and direct-to-recruiter guidelines.</div>
-                </div>
-
-                <!-- Executive Tier -->
-                <div class="pricing-card" onclick="selectPlan('plan-executive')">
-                    <input type="radio" id="plan-executive" name="tier" value="executive" onclick="event.stopPropagation(); selectPlan('plan-executive')">
-                    <div class="pricing-title">Executive Suite</div>
-                    <div class="pricing-price">$500</div>
-                    <div class="pricing-desc">All-inclusive VIP overhaul: Complete rewrite, LinkedIn profile optimization, and 1-on-1 interview strategy coaching.</div>
-                </div>
-            </div>
-        </div>
+               
 
         <!-- Custom 15-Second Screen Loader Container -->
         <div id="uploadLoader" class="loader-overlay">
