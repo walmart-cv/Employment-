@@ -1,0 +1,69 @@
+<!DOCTYPE html> <html lang="en"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Select Your Plan - HR Optimize</title> <style> :root { --primary: #0f172a; --accent: #2563eb; --text: #334155; --bg-color: #0b0f19; --white: #ffffff; } * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; } body { background-color: var(--bg-color); color: #f3f4f6; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 40px 20px; } .portfolio-card { background-color: #111827; border: 1px solid #1f2937; max-width: 650px; width: 100%; border-radius: 24px; padding: 32px; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2); text-align: center; } .header-title { font-size: 24px; font-weight: 800; color: #ffffff; margin: 0 0 8px 0; letter-spacing: -0.025em; } .header-subtitle { color: #9ca3af; font-size: 15px; line-height: 1.6; margin: 0 0 24px 0; } .form-group { margin-top: 25px; margin-bottom: 20px; text-align: left; } label { display: block; font-size: 14px; font-weight: 600; color: #ffffff; margin-bottom: 12px; } .pricing-grid { display: grid; grid-template-columns: 1fr; gap: 15px; margin-bottom: 25px; } .pricing-card { border: 1px solid #1f2937; border-radius: 12px; padding: 20px; position: relative; cursor: pointer; transition: all 0.2s; background: #1f2937; text-align: left; } .pricing-card:hover { border-color: var(--accent); } .pricing-card input[type="radio"] { position: absolute; top: 20px; right: 20px; accent-color: var(--accent); width: 18px; height: 18px; } .pricing-card.selected { border-color: var(--accent); background-color: #1e293b; box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2); } .pricing-title { font-size: 16px; font-weight: 700; color: #ffffff; display: flex; align-items: center; gap: 8px; } .pricing-price { font-size: 20px; font-weight: 800; color: #38bdf8; margin: 6px 0; } .pricing-desc { font-size: 13px; color: #9ca3af; line-height: 1.5; } .popular-tag { background: #fef3c7; color: #92400e; font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 4px; text-transform: uppercase; } .privacy-seal { font-size: 12px; color: #94a3b8; text-align: center; margin-top: 15px; margin-bottom: 25px; } .btn-container { margin-top: 24px; } .submit-btn { display: block; background-color: #2563eb; color: #ffffff; font-weight: 700; font-size: 16px; padding: 16px 28px; border: none; border-radius: 12px; cursor: pointer; text-decoration: none; transition: background-color 0.2s, transform 0.1s; text-align: center; box-sizing: border-box; box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.2); width: 100%; } .submit-btn:hover { background-color: #1d4ed8; } </style> </head>
+<body>
+
+<div class="portfolio-card">
+    <h1 class="header-title">Choose Optimization Package</h1>
+    <p class="header-subtitle">Select a dedicated operational timeline restructuring strategy to deploy for your career transition goals.</p>
+
+    <!-- Connected directly to payment.html using GET to allow static routing inside TrebEdit -->
+    <form action="payment.html" method="GET">
+        <div class="form-group">
+            <label>Select Your Optimization Plan</label>
+            <div class="pricing-grid">
+                
+                <!-- $100 Tier -->
+                <div class="pricing-card" onclick="selectPlan('plan-basic')">
+                    <input type="radio" id="plan-basic" name="tier" value="basic" checked onclick="event.stopPropagation(); selectPlan('plan-basic')">
+                    <div class="pricing-title">Essential Optimization</div>
+                    <div class="pricing-price">$100</div>
+                    <div class="pricing-desc">Core keyword optimization, layout compliance restructuring, and ATS formatting validation.</div>
+                </div>
+                
+                <!-- $150 Tier -->
+                <div class="pricing-card selected" onclick="selectPlan('plan-premium')">
+                    <input type="radio" id="plan-premium" name="tier" value="premium" onclick="event.stopPropagation(); selectPlan('plan-premium')">
+                    <div class="pricing-title">Pro Campaign <span class="popular-tag">Popular</span></div>
+                    <div class="pricing-price">$150</div>
+                    <div class="pricing-desc">Full professional rewrite, custom targeted keyword insertion, and direct-to-recruiter delivery layouts.</div>
+                </div>
+
+                <!-- $500 Tier -->
+                <div class="pricing-card" onclick="selectPlan('plan-executive')">
+                    <input type="radio" id="plan-executive" name="tier" value="executive" onclick="event.stopPropagation(); selectPlan('plan-executive')">
+                    <div class="pricing-title">Executive Suite</div>
+                    <div class="pricing-price">$500</div>
+                    <div class="pricing-desc">All-inclusive VIP overhaul: Complete resume transformation, LinkedIn optimization, and 1-on-1 career strategy check.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="privacy-seal">
+            🔒  Privacy Guarantee: Your files are strictly used for this audit and are securely deleted immediately afterward.
+        </div>
+
+        <div class="btn-container">
+            <button type="submit" class="submit-btn">Proceed to Secure Checkout</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    function selectPlan(planId) {
+        // Uncheck boxes and remove highlight configurations
+        document.querySelectorAll('.pricing-card').forEach(card => {
+            card.classList.remove('selected');
+        });
+        
+        const radio = document.getElementById(planId);
+        radio.checked = true;
+        radio.closest('.pricing-card').classList.add('selected');
+    }
+    
+    // Auto initialization setups
+    document.addEventListener("DOMContentLoaded", function() {
+        selectPlan('plan-premium');
+    });
+</script>
+
+</body>
+</html>
