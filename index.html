@@ -27,7 +27,8 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            padding: 40px 20px;
+            width: 100%;
+            padding: 20px;
         }
 
         .portfolio-card {
@@ -38,6 +39,12 @@
             border-radius: 24px;
             padding: 32px;
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+        }
+
+        @media (max-width: 480px) {
+            .portfolio-card {
+                padding: 20px;
+            }
         }
 
         .header-title {
@@ -60,21 +67,24 @@
             border-radius: 16px;
             overflow: hidden;
             background-color: #030712;
-            padding: 24px;
+            padding: 12px;
             margin-bottom: 24px;
             display: flex;
             justify-content: center;
             align-items: center;
+            width: 100%;
         }
 
         .resume-graphic {
             width: 100%;
             height: auto;
             max-width: 580px;
+            display: block;
         }
 
         .btn-container {
             margin-top: 24px;
+            width: 100%;
         }
 
         .submit-btn {
@@ -113,7 +123,7 @@
     </p>
     <div class="image-container">
         <svg class="resume-graphic" viewBox="0 0 560 300" xmlns="http://w3.org">
-            <rect width="560" height="300" rx="16" fill="#1e293b"/>
+            <rect width="100%" height="100%" rx="16" fill="#1e293b"/>
             
             <!-- LEFT: Bad Graphic Format -->
             <g transform="translate(25, 25)">
@@ -154,8 +164,8 @@
             <g transform="translate(305, 25)">
                 <rect width="230" height="250" rx="6" fill="#ffffff" filter="drop-shadow(0 4px 6px rgba(0,0,0,0.1))"/>
                 
-                <text x="115" y="25" font-family="Arial" font-size="14" font-weight="bold" fill="#0f172a" text-anchor="middle">JANE DOE, MD</text>
-                <text x="115" y="38" font-family="Arial" font-size="7" font-weight="600" fill="#475569" text-anchor="middle">New York, NY | (555) 019-2834 | email@domain.com</text>
+                <text x="115" y="25" font-family="Arial" font-weight="bold" fill="#0f172a" text-anchor="middle" font-size="14">JANE DOE, MD</text>
+                <text x="115" y="38" font-family="Arial" font-weight="600" fill="#475569" text-anchor="middle" font-size="7">New York, NY | (555) 019-2834 | doejane@gmail.com</text>
                 
                 <text x="15" y="62" font-family="Arial" font-size="8" font-weight="bold" fill="#1e3a8a">PROFESSIONAL SUMMARY</text>
                 <line x1="15" y1="67" x2="215" y2="67" stroke="#1e3a8a" stroke-width="1"/>
@@ -172,6 +182,7 @@
                 <text x="15" y="154" font-family="Arial" font-size="8" font-weight="bold" fill="#0f172a">Lead Outpatient Psychiatrist — Health Corp</text>
                 <rect x="15" y="160" width="200" height="4" rx="1" fill="#64748b"/>
                 <rect x="15" y="168" width="175" height="4" rx="1" fill="#cbd5e1"/>
+                
                 <text x="15" y="191" font-family="Arial" font-size="8" font-weight="bold" fill="#1e3a8a">CORE COMPETENCIES & KEYWORDS</text>
                 <text x="15" y="206" font-family="Arial" font-size="7" font-weight="600" fill="#16a34a">✓ ATS System Matched & parsed seamlessly</text>
                 
@@ -187,8 +198,7 @@
         Our team strips unreadable visual noise out, structures your operational timeline cleanly into standard chronological text lanes, and optimizes critical strategic sector keywords. The result ensures maximum candidate exposure and clear interview conversions.
     </p>
 
-    <!-- Changed to GET to allow working browser validation checks inside phone software environments -->
-    <form action="action.html" method="GET">
+    <form action="successful.html" method="GET">
         <div class="btn-container">
             <button type="submit" class="submit-btn">Submit Your CV for an Expert ATS Audit</button>
         </div>
