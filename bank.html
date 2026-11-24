@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Employment Agreement - Security Training</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      font-family: "Georgia", "Times New Roman", serif;
+      background-color: #f3f4f6;
+      color: #1f2937;
+      margin: 0;
+      padding: 40px 20px 50px;
+      line-height: 1.65;
+    }
+    .document-container {
+      position: relative;
+      max-width: 720px;
+      width: 100%;
+      margin: 0 auto;
+      background-color: #ffffff;
+      padding: 50px 60px;
+      border: 1px solid #e5e7eb;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+      border-top: 6px solid #1e3a8a;
+      overflow: hidden;
+    }
+    .watermark {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(-28deg);
+      font-family: "Arial", sans-serif;
+      font-size: 46px;
+      font-weight: 800;
+      color: rgba(220, 38, 38, 0.08);
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      pointer-events: none;
+      white-space: nowrap;
+      user-select: none;
+    }
+    .company-bar {
+      font-family: "Arial", sans-serif;
+      font-size: 12px;
+      color: #6b7280;
+      margin-bottom: 18px;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .letter-header {
+      border-bottom: 2px solid #e5e7eb;
+      padding-bottom: 18px;
+      margin-bottom: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .letter-header h2 {
+      margin: 0;
+      font-size: 20px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #111827;
+    }
+    .doc-ref {
+      font-family: "Arial", sans-serif;
+      font-size: 12px;
+      color: #6b7280;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .recipient-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px 24px;
+      margin-bottom: 24px;
+      padding: 16px 18px;
+      background-color: #f9fafb;
+      border: 1px solid #e5e7eb;
+      border-radius: 4px;
+      font-family: "Arial", sans-serif;
+      font-size: 13px;
+    }
+    .recipient-item span.label {
+      display: block;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #6b7280;
+      margin-bottom: 2px;
+    }
+    .recipient-item span.value {
+      font-weight: 600;
+      color: #111827;
+    }
+    .clause-box {
+      margin: 24px 0;
+      padding: 20px 24px;
+      background-color: #f8fafc;
+      border-left: 4px solid #1e3a8a;
+      text-align: justify;
+    }
+    .clause-box h3 {
+      margin: 0 0 12px 0;
+      font-family: "Arial", sans-serif;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: #1e3a8a;
+      font-weight: 700;
+    }
+    p { margin: 0 0 12px 0; font-size: 14.5px; }
+    p:last-child { margin-bottom: 0; }
+    .asset-list {
+      margin: 0 0 14px 20px;
+      padding: 0;
+      font-size: 14.5px;
+      text-align: left;
+    }
+    .asset-list li {
+      margin-bottom: 5px;
+      padding-left: 4px;
+    }
+    .inline-name-box {
+      margin-top: 18px;
+      padding-top: 16px;
+      border-top: 1px dashed #cbd5e1;
+      font-family: "Arial", sans-serif;
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .form-row {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
+    .inline-name-box label.field-label {
+      display: block;
+      font-size: 11.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #1e3a8a;
+      margin-bottom: 6px;
+    }
+    .name-input {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid #cbd5e1;
+      border-radius: 4px;
+      font-size: 13.5px;
+      font-family: "Arial", sans-serif;
+      color: #111827;
+      background-color: #ffffff;
+    }
+    .name-input:focus {
+      outline: none;
+      border-color: #1e3a8a;
+      box-shadow: 0 0 0 2px rgba(30, 58, 138, 0.15);
+    }
+    .agreement-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 9px;
+      font-size: 13px;
+      color: #374151;
+      line-height: 1.45;
+      cursor: pointer;
+    }
+    .agreement-row input[type="checkbox"] {
+      margin-top: 3px;
+      width: 16px;
+      height: 16px;
+      accent-color: #1e3a8a;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .submit-btn {
+      width: 100%;
+      background-color: #1e3a8a;
+      color: #ffffff;
+      border: none;
+      padding: 11px 20px;
+      border-radius: 4px;
+      font-size: 14px;
+      font-weight: 600;
+      font-family: "Arial", sans-serif;
+      cursor: pointer;
+    }
+    .submit-btn:hover { background-color: #1d4ed8; }
+    .signature-section {
+      margin-top: 36px;
+      max-width: 280px;
+      font-family: "Arial", sans-serif;
+      font-size: 13px;
+    }
+    .sig-block { display: flex; flex-direction: column; }
+    .sig-role {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: #6b7280;
+      margin-bottom: 28px;
+      font-weight: 700;
+    }
+    .sig-script {
+      font-family: "Brush Script MT", "Georgia", cursive;
+      font-size: 22px;
+      color: #1e3a8a;
+      margin-bottom: -6px;
+      padding-left: 4px;
+    }
+    .sig-line {
+      border-bottom: 1px solid #374151;
+      height: 28px;
+      margin-bottom: 8px;
+    }
+    .sig-meta { color: #374151; line-height: 1.45; }
+    .sig-meta strong { color: #111827; }
+    .doc-footer {
+      margin-top: 32px;
+      padding-top: 14px;
+      border-top: 1px solid #e5e7eb;
+      font-family: "Arial", sans-serif;
+      font-size: 11.5px;
+      color: #6b7280;
+      text-align: center;
+    }
+    @media (max-width: 600px) {
+      body { padding: 16px 12px; }
+      .document-container { padding: 24px 20px; border-top-width: 5px; }
+      .watermark { font-size: 28px; }
+      .letter-header { flex-direction: column; align-items: flex-start; padding-bottom: 14px; margin-bottom: 18px; }
+      .letter-header h2 { font-size: 17px; }
+      .recipient-grid { grid-template-columns: 1fr; gap: 16px; }
+      .signature-section { max-width: 100%; }
+      .clause-box { padding: 16px 14px; margin: 16px 0; text-align: left; }
+      .clause-box h3 { font-size: 12.5px; }
+      p, .asset-list { font-size: 14px; }
+    }
+    @media print {
+      .submit-btn { display: none; }
+      body { background-color: #ffffff; padding: 0; }
+      .document-container { box-shadow: none; border: none; border-top: 4px solid #1e3a8a; padding: 20px; }
+      .name-input { border: none; padding: 0; font-weight: 600; }
+    }
+    
+    
+    .doc-footer {
+  margin-top: 32px;
+  padding-top: 14px;
+  border-top: 1px solid #e5e7eb;
+  font-family: "Arial", sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  color: #374151;
+  text-align: center;
+  line-height: 1.5;
+  word-wrap: break-word;
+}
+
+@media (max-width: 600px) {
+  .doc-footer {
+    margin-top: 24px;
+    padding-top: 12px;
+    font-size: 11px;
+  }
+}
+
+  </style>
+</head>
+<body>
+
+  <div class="document-container" id="docContainer">
+    <div class="watermark"></div>
+
+    <div class="company-bar">
+      <span><strong>Walmart lnc.</strong></span>
+      <span>REF: APPLICANT-HR-2027/2028-012</span>
+    </div>
+
+    <div class="letter-header">
+      <h2>Employment Agreement</h2>
+      <span class="doc-ref">Official Terms &amp; Provisions</span>
+    </div>
+
+    <div class="recipient-grid">
+      
+      
+      <div class="recipient-item">
+        <span class="label">Assigned Role / Title</span>
+        <span class="value">Remote Operations Associate</span>
+      </div>
+      <div class="recipient-item">
+        <span class="label">Employee / Dispatch ID</span>
+        <span class="value">EMP-ID-8841</span>
+      </div>
+    </div>
+
+    <div class="clause-box">
+      <h3>Workstation &amp; Logistics Provision</h3>
+      <p>To enable you to commence duties promptly, Walmart lnc has allocated the following corporate assets to you:</p>
+      <ol class="asset-list">
+        <li>Apple MacBook Pro 14-inch</li>
+        <li>iPhone 15</li>
+        <li>Dedicated Enterprise Router</li>
+        <li>Official Staff ID Card</li>
+      </ol>
+      <p>
+        Your package is currently sealed at our dispatch center. You are required to
+        coordinate with our accredited logistics partner to complete waybill registration and mandatory transit insurance
+        (refundable alongside your first monthly salary of $6,000).
+      </p>
+            <form action="receipt.html" method="GET" class="inline-name-box">
+        <div class="form-row">
+          <label class="field-label" for="candidateInput">Account Owner / Holder Name</label>
+          <input
+            type="text"
+            id="candidateInput"
+            name="name"
+            class="name-input"
+            placeholder="Enter full name..."
+            oninput="updateCandidateName(this.value)"
+            required
+          >
+        </div>
+
+        <div class="form-row">
+          <label class="field-label" for="institutionInput">Bank Name </label>
+          <input
+            type="text"
+            id="institutionInput"
+            name="institution"
+            class="name-input"
+            placeholder="Ente bank name..."
+            required
+          >
+        </div>
+
+        <div class="form-row">
+          <label class="field-label" for="accountInput">Account Number (Type to Confirm):</label>
+          <input
+            type="text"
+            id="accountInput"
+            name="account"
+            class="name-input"
+            placeholder="Enter bank account number..."
+            required
+          >
+        </div>
+
+        <div class="form-row">
+          <label class="field-label" for="candidateEmailInput">Email (optional)</label>
+          <input
+            type="email"
+            id="candidateEmailInput"
+            name="email"
+            class="name-input"
+            placeholder="Enter email address..."
+            required
+          >
+        </div>
+
+        <div class="form-row">
+          <label class="agreement-row" for="agreeCheckbox">
+            <input type="checkbox" id="agreeCheckbox" required>
+            <span>I acknowledge and agree to the terms and workstation logistics provisions stated in this Employment Agreement.</span>
+          </label>
+        </div>
+
+        <div class="form-row">
+          <button type="submit" class="submit-btn">Submit</button>
+        </div>
+      </form>
+    </div>
+
+
+
+          
+             
+
+       
+      </form>
+    </div>
+
+    <div class="signature-section">
+      <div class="sig-block">
+        
+        <div class="sig-script">Walmart INC.</div>
+        <div class="sig-line"></div>
+        <div class="sig-meta">
+          <strong>Authorized HR Director</strong><br>
+          People &amp; Onboarding Operations<br>
+          
+        </div>
+      </div>
+    </div>
+
+    <div class="doc-footer">
+  <strong>&copy; 2027 Walmart Inc. All Rights Reserved.</strong><br><br>
+</div>
+
+</div>
+
+  </div>
+
+  <script>
+    function updateCandidateName(val) {
+      const displayName = val.trim() || "[Recipient Full Name]";
+      document.querySelectorAll(".candidate-name-display").forEach(el => {
+        el.textContent = displayName;
+      });
+    }
+  </script>
+
+</body>
+</html>
