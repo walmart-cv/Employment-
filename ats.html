@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resume Review Pro — ATS Optimization &amp; Clearance Report</title>
+    <title>ATS Automation — Executive ATS Resume &amp; Clearance Report</title>
     <style>
         /* Modern Reset & Base Styles */
         * {
@@ -169,7 +169,7 @@
         .premium-btn {
             display: inline-block;
             width: 100%;
-            max-width: 360px;
+            max-width: 380px;
             background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
             color: #ffffff;
             font-size: 15.5px;
@@ -181,6 +181,12 @@
             border-radius: 50px;
             box-shadow: 0 4px 15px rgba(30, 60, 114, 0.4);
             transition: all 0.3s ease;
+        }
+
+        .delivery-note {
+            margin-top: 12px;
+            font-size: 13px;
+            color: #64748b;
         }
 
         /* Desktop Hover Enhancements */
@@ -235,7 +241,7 @@
     <div class="container">
         <!-- Business Logo / Title Area -->
         <div class="brand-header">
-            <div class="brand-logo">Resume Review Pro</div>
+            <div class="brand-logo">ATS Automation</div>
             <div class="brand-subtitle">ATS Optimization &amp; Clearance Report</div>
             <div class="status-pill">
                 Action Required: Pending Clearance &mdash; <span id="candidateHeaderName">Candidate</span>
@@ -257,20 +263,21 @@
         <p>The automated system is getting stalled on your header layout and missing keyword integration, preventing your file from passing final verification.</p>
 
         <div class="solutions-box">
-            <div class="solutions-title">Here is what we will do to clear your file:</div>
+            <div class="solutions-title">Executive ATS Resume &amp; Optimization — What's Included:</div>
             <ul class="solutions-list">
-                <li>Completely strip out unreadable design columns and graphical elements.</li>
-                <li>Reformat your file into a clean, single-column, ATS-proof structure.</li>
-                <li>Tailor your profile summary and skills using role-specific keywords.</li>
-                <li>Activate your restructure with a watermarked preview of your compliant English resume for final ATS approval.</li>
+                <li><strong>ATS-Optimized Resume Overhaul:</strong> Rewritten and formatted into a clean, single-column structure to pass global recruiter software.</li>
+                <li><strong>LinkedIn Profile Optimization:</strong> High-converting headline, summary, and experience alignment.</li>
+                <li><strong>Tailored Cover Letter Template:</strong> Customized specifically for your target roles.</li>
+                <li><strong>Watermarked Compliance Preview:</strong> Delivered within 48 hours for final ATS clearance and approval.</li>
             </ul>
         </div>
 
-        <p>If you are ready to resolve these formatting issues and complete your clearance today, proceed below:</p>
+        <p>If you are ready to resolve these formatting issues and complete your clearance today, proceed to secure checkout below:</p>
 
         <!-- Premium Connection Button Section -->
         <div class="cta-container">
-            <a href="option.html" class="premium-btn">Get Your Premium CV &amp; Pay Securely</a>
+            <a href="https://selar.com/15721566o5?currency=USD" class="premium-btn">Get Your premium CV & Pay Securely</a>
+           
         </div>
     </div>
 
@@ -303,10 +310,11 @@
                 }
             }
 
-            // 3. Forward all URL parameters to option.html when clicking the CTA button
+            // 3. Forward URL parameters cleanly with "&" to the Selar checkout link
             const ctaBtn = document.querySelector(".premium-btn");
             if (ctaBtn && window.location.search) {
-                ctaBtn.href = "option.html" + window.location.search;
+                const cleanParams = window.location.search.replace(/^\?/, "&");
+                ctaBtn.href = "https://selar.com/15721566o5?currency=USD" + cleanParams;
             }
         });
     </script>
